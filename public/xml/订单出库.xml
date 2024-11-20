@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMLogisticsOrderConModel name="GIMLogisticsOrderConModel" id="siamodel01000048" zh_Ch="订单出库" type="class">
+  <AttributeSet type="property">
+    <AttributeID name="AttributeID" zh_CH="属性标识" value="" type="Unsigned8"/>
+    <OrderID name="OrderID" zh_CH="订单ID" type="Octetstring" value=""/>
+    <OrderStepNo name="OrderStepNo" zh_CH="订单步号" type="Octetstring" value=""/>
+    <Status name="Status" zh_CH="订单状态" value="" datatype="Unsigned8"/>
+    <Custom name="Custom" zh_CH="自定义" datatype="" value=""/>
+  </AttributeSet>
+</GIMLogisticsOrderConModel>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMRobotAssembleModel name="GIMRobotAssembleModel" id="siamodel01000073" zh_Ch="组装" type="class">
+    <AttributeSet type="property">
+        <GIMAssembleOrderModel name="GIMAssembleOrderModel" zh_CH="装配订单信息模型" value=""/>
+        <GIMAssembleOrderConModel name="GIMAssembleOrderConModel" zh_CH="装配订单确认信息模型" value=""/>
+        <GIMAssembleTrayInfoModel name="GIMAssembleTrayInfoModel" zh_CH="装配托盘信息模型" value=""/>
+        <GIMMaterialTrayInfoModel name="GIMMaterialTrayInfoModel" zh_CH="物料托盘信息模型" value=""/>
+        <GIMRobotInfoModel name="GIMRobotInfoModel" zh_CH="机器人本体信息模型" value=""/>
+        <GIMTorqueModel name="GIMTorqueModel" zh_CH="扭矩信息模型" value=""/>
+        <GIMManipulatorRequestModel name="GIMManipulatorRequestModel" zh_CH="总装机械手工作请求信息模型" value=""/>
+        <GIMManipulatorResponseModel name="GIMManipulatorResponseModel" zh_CH="总装机械手工作响应信息模型" value=""/>
+        <GIMLiftResquestModel name="GIMLiftResquestModel" zh_CH="举升机构工作请求信息模型" value=""/>
+        <GIMLiftResponseModel name="GIMLiftResponseModel" zh_CH="举升机构工作响应信息模型" value=""/>
+    </AttributeSet>
+</GIMRobotAssembleModel>

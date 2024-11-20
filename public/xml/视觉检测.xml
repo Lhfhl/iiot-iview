@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMPressureTestModel name="GIMPressureTestModel" id="siamodel01000096" zh_Ch="视觉检测" type="class">
+  <AttributeSet type="property">
+    <AttributeID name="AttributeID" zh_CH="属性标识" value="" type="Unsigned8"/>
+    <OrderID name="OrderID" zh_CH="订单ID" datatype="Unsigned8" value=""/>
+    <RobotID name="RobotID" zh_CH="机器人本体编码" datatype="Unsigned8" value=""/>
+    <Result name="Result" zh_CH="结果" datatype="Unsigned8" value=""/>
+    <Custom name="Custom" zh_CH="自定义" datatype="" value=""/>
+  </AttributeSet>
+</GIMPressureTestModel>

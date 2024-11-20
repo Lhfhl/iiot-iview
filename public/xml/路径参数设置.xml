@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMControlSystemModel name="GIMControlSystemModel" id="siamodel010000017" zh_Ch="路径参数设置" type="class">
+  <AttributeSet type="property">
+    <GIMComponentBaseProcessAS>
+      <GIMAttributeList>
+        <GIMAttribute>
+          <AttributeName>PowerSwitch</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>boolean</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>MovementMode</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>int32</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>CollectionInstruction</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>ControlInstruction</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>ExecutionState</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>ErrorMessage</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>OperatingAuthority</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>ResetInstruction</AttributeName>
+          <AttributeAccess>Read_Write</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+      </GIMAttributeList>
+    </GIMComponentBaseProcessAS>
+  </AttributeSet>
+</GIMControlSystemModel>

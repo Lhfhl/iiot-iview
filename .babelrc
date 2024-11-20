@@ -1,0 +1,10 @@
+{
+  "presets": [
+    "@babel/preset-env",
+    "@vue/app"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-optional-chaining"
+    // 其他插件
+  ]
+}

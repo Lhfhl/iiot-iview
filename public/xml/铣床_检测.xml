@@ -1,0 +1,10 @@
+<GIMConveyorCommandModel name="GIMConveyorCommandModel" id="siamodel01000044" zh_Ch="铣床>>>检测" type="class">
+  <AttributeSet type="property">
+    <AttributeID name="AttributeID" zh_CH="属性标识" value="" type="Unsigned8"/>
+    <ConveyorID name="ConveyorID" zh_CH="输送机ID" type="Octetstring" value=""/>
+    <StartPlace name="StartPlace" zh_CH="起始地" value="" datatype="Unsigned8"/>
+    <Destination name="Destination" zh_CH="目的地" datatype="Unsigned8" value=""/>
+    <DestinationNo name="DestinationNo" zh_CH="目的地操作码" datatype="Unsigned8" value=""/>
+    <Custom name="Custom" zh_CH="自定义" datatype="" value=""/>
+  </AttributeSet>
+</GIMConveyorCommandModel>

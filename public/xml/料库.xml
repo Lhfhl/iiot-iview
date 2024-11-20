@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMStorgeModel name="GIMStorgeModel" id="siamodel01000036" zh_Ch="料库" type="class">
+    <AttributeSet type="property">
+        <GIMDistributionOrderModel name="GIMDistributionOrderModel" zh_CH="配盘订单信息模型" value=""/>
+        <GIMDistributionResultModel name="GIMDistributionResultModel" zh_CH="配盘结果信息模型" value=""/>
+        <GIMShelfStatusModel name="GIMShelfStatusModel" zh_CH="货架状态信息模型" value=""/>
+        <GIMStackerCommandModel name="GIMStackerCommandModel" zh_CH="堆垛机命令请求" value=""/>
+        <GIMStackerStatusModel name="GIMStackerStatusModel" zh_CH="堆垛机状态响应信息模型" value=""/>
+        <GIMShuttleCommandModel name="GIMShuttleCommandModel" zh_CH="穿梭机命令请求模型" value=""/>
+        <GIMShuttlestatusModel name="GIMShuttlestatusModel" zh_CH="穿梭机状态响应信息模型" value=""/>
+        <GIMConveyorCommandModel name="GIMConveyorCommandModel" zh_CH="输送机命令请求" value=""/>
+        <GIMConveyorStatusModel name="GIMConveyorStatusModel" zh_CH="输送机状态响应信息模型" value=""/>
+    </AttributeSet>
+</GIMStorgeModel>

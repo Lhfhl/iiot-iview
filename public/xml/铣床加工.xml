@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GIMTMModel name="GIMTMModel" id="siamodel010000016" zh_Ch="铣床加工" type="class">
+  <AttributeSet type="property">
+    <GIMComponentBaseProcessAS>
+      <GIMAttributeList>
+        <GIMAttribute>
+          <AttributeName>TaskID</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>TaskStoragePath</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>TaskStatus</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>OperationInstruction</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>string</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>CycleIdentification</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>boolean</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+        <GIMAttribute>
+          <AttributeName>SpeedIdentification</AttributeName>
+          <AttributeAccess>Read_Only</AttributeAccess>
+          <AttributeDatatype>int32</AttributeDatatype>
+          <AttributeValue/>
+        </GIMAttribute>
+      </GIMAttributeList>
+    </GIMComponentBaseProcessAS>
+  </AttributeSet>
+</GIMTMModel>
