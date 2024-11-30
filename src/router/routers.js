@@ -58,7 +58,7 @@ export default [
       icon: 'md-menu',
       notCache: true
     },
-    component: Main,
+    component: () => import('@/view/industrial-monitoring/home.vue'),
     children: [
       {
         path: 'line-monitoring',
@@ -68,6 +68,7 @@ export default [
           title: '产线监控',
           notCache: true
         },
+        // component: () => import('@/view/industrial-monitoring/IndustrialMonitoring.vue')
         component: () => import('@/view/industrial-monitoring/IndustrialMonitoring.vue')
       }
     ]
@@ -123,10 +124,10 @@ export default [
           icon: 'md-funnel',
           title: '模型详情',
           hideInMenu: true,
-          hide: true,
+          hide: true
         },
         component: () => import('@/view/model-manage/ModelDetail.vue')
-      },
+      }
     ]
   },
   {
@@ -199,6 +200,23 @@ export default [
       }
     ]
   },
+
+  // {
+  //   path: '/home',
+  //   name: 'home',
+  //   meta: {
+  //     hideInMenu: false
+  //   },
+  //   component: () => import('@/view/industrial-monitoring/home.vue')
+  //   // children: [
+  //   //   {
+  //   //     path: 'monitoring',
+  //   //     name: 'Monitoring',
+  //   //     component: () => import('@/view/industrial-monitoring/IndustrialMonitoring.vue')
+  //   //   }
+  //   // ]
+  // },
+
   {
     // 401 错误页
     path: '/401',
@@ -224,6 +242,6 @@ export default [
     meta: {
       hideInMenu: true
     },
-    component: () => import('@/view/error-page/404.vue')  // 动态加载 404 错误页面
+    component: () => import('@/view/error-page/404.vue') // 动态加载 404 错误页面
   }
 ]

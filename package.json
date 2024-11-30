@@ -11,6 +11,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
+    "@jiaminghi/data-view": "^2.10.0",
     "axios": "^0.18.0",
     "clipboard": "^2.0.0",
     "codemirror": "^5.38.0",
@@ -32,6 +33,7 @@
     "vue-codemirror": "^4.0.6",
     "vue-i18n": "^7.8.0",
     "vue-router": "^3.0.1",
+    "vue-seamless-scroll": "^1.1.23",
     "vue-template-compiler": "^2.7.16",
     "vuedraggable": "^2.23.0",
     "vuex": "^3.0.1",

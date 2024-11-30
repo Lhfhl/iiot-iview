@@ -1,19 +1,21 @@
 <template>
-  <div class="hello-ezuikit-js">
-    <div id="video-container" style="width: 1000px; height: 600px;"></div>
-    <!-- <div>
-      <button v-on:click="init">初始化</button>
-      <button v-on:click="stop">暂停播放</button>
-      <button v-on:click="play">开始播放</button>
-      <button v-on:click="openSound">关闭声音</button>
-      <button v-on:click="closeSound">开启声音</button>
-      <button v-on:click="capturePicture">截图</button>
-      <button v-on:click="fullScreen">全屏播放</button>
-      <button v-on:click="ezopenStartTalk">开始对讲</button>
-      <button v-on:click="ezopenStopTalk">结束对讲</button>
-      <button v-on:click="destroy">销毁</button>
-    </div> -->
-  </div>
+  <!-- <div class="video-wrapper">  -->
+    <div class="hello-ezuikit-js">
+      <div id="video-container" class="video-wrapper"></div>
+      <!-- <div>
+        <button v-on:click="init">初始化</button>
+        <button v-on:click="stop">暂停播放</button>
+        <button v-on:click="play">开始播放</button>
+        <button v-on:click="openSound">关闭声音</button>
+        <button v-on:click="closeSound">开启声音</button>
+        <button v-on:click="capturePicture">截图</button>
+        <button v-on:click="fullScreen">全屏播放</button>
+        <button v-on:click="ezopenStartTalk">开始对讲</button>
+        <button v-on:click="ezopenStopTalk">结束对讲</button>
+        <button v-on:click="destroy">销毁</button>
+      </div> -->
+    </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -111,24 +113,37 @@ export default {
       player.fullScreen();
     },
     destroy() {
-      try{
-        if (player){
+      try {
+        if (player) {
           var destroyPromise = player.destroy();
           destroyPromise.then((data) => {
             console.log("promise 获取 数据", data);
           });
           player = null;
         }
-      }catch(error){
+      } catch (error) {
         console.error("Error while destroying player:", error);
       }
     }
   },
   watch: {
-      // 监听路由变化
-      '$route'() {
-        this.init();
-      }
+    // 监听路由变化
+    '$route'() {
+      this.init();
     }
+  }
 };
 </script>
+
+<style scoped>
+.video-wrapper {
+  display: flex; /* 使用 Flex 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  width: 110%; /* 占满视口宽度 */
+  height: 110%; /* 占满视口高度 */
+  background-color: black; /* 父容器背景为黑色 */
+
+}
+
+</style>

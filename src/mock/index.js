@@ -1,4 +1,5 @@
 import Mock from 'mockjs'
+// import './screen' // 引入 screen.js
 import { login, logout, getUserInfo } from './login'
 import { getTableData, getDragList } from './data'
 

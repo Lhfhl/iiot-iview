@@ -3,7 +3,7 @@
     <el-row :gutter="40">
       <el-col :span="3" :offset="1">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Indoor_relative_humidity"
             title="室内相对湿度"
@@ -15,7 +15,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Outdoor_relative_humidity"
             title="室外相对湿度"
@@ -26,7 +26,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Sun_light_in_east"
             title="东立面的阳光"
@@ -37,7 +37,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Sun_light_in_west"
             title="西立面的阳光"
@@ -48,7 +48,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Sun_irradiance"
             title="太阳辐照度"
@@ -61,7 +61,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Wind_speed"
             title="风速"
@@ -72,7 +72,7 @@
       </el-col>
       <el-col :span="3">
         <el-card class="env_card">
-          <el-statistic 
+          <el-statistic
             :precision="2"
             :value="Rainfall_ratio"
             title="降雨比例"
@@ -97,7 +97,7 @@
           />
         </el-card>
       </el-col>
-      
+
       <el-col :span="14">
           <el-card >
             <!-- 标题部分 -->
@@ -110,7 +110,7 @@
             <div style="width: 100%; display: inline-block; height: 100%;">
               <el-statistic :value="temperature" title="未来车间温度">
                 <template slot="suffix">
-                  <div> 
+                  <div>
                     ℃ 无异常
                   </div>
                 </template>
@@ -121,7 +121,7 @@
     </el-row>
   </div>
 </template>
-  
+
 <script>
 import axios from 'axios';
 import DynamicChart from '@/view/industrial-warning/DynamicChart.vue';
@@ -135,20 +135,20 @@ export default {
       /**
        * 七个指标
        */
-      Indoor_relative_humidity: 0,  //室内相对湿度，%
-      Outdoor_relative_humidity: 0, //室外相对湿度，%
-      Sun_light_in_east: 0, //东立面的阳光，lux
-      Sun_light_in_west: 0, //西立面的阳光，lux
-      Sun_irradiance: 0,    //太阳辐照度，单位 W/m2
-      Wind_speed: 0,        //风速，m/s
-      Rainfall_ratio: 0,     //降雨比例
+      Indoor_relative_humidity: 0, // 室内相对湿度，%
+      Outdoor_relative_humidity: 0, // 室外相对湿度，%
+      Sun_light_in_east: 0, // 东立面的阳光，lux
+      Sun_light_in_west: 0, // 西立面的阳光，lux
+      Sun_irradiance: 0, // 太阳辐照度，单位 W/m2
+      Wind_speed: 0, // 风速，m/s
+      Rainfall_ratio: 0, // 降雨比例
       /**
        * 安全头盔识别
        */
       safety_helmet_identification_url: '',
       intervalId: null, // 七个指标定时器 ID
-      intervalIdHelmet: null,  //安全头盔定时器ID
-      //未来第30分钟的温度
+      intervalIdHelmet: null, // 安全头盔定时器ID
+      // 未来第30分钟的温度
       temperature: null, // 存储第30个数据的温度
     };
   },
@@ -175,9 +175,9 @@ export default {
   },
   methods: {
     /**
-     * 
+     *
      * 获取七个指标
-     * 
+     *
      */
     async fetchMetric() {
       try {
@@ -196,18 +196,18 @@ export default {
       }
     },
     /**
-     * 
+     *
      *安全头盔识别
-     * 
+     *
      */
     fetchHelmetImage() {
       // console.log("我刷新了一次")
       this.safety_helmet_identification_url = `/schedulerfront/helmet`;
     },
     /**
-     * 
+     *
      * 取得未来第30分钟的温度
-     * 
+     *
      */
     async fetchTemperatureData() {
       try {
@@ -219,7 +219,7 @@ export default {
         if (temperatureEntries.length >= 30) {
           const temp = temperatureEntries[29][1]; // 第30个数据（索引从0开始）
           console.log(temperatureEntries)
-          console.log("当前的温度",temp)
+          console.log("当前的温度", temp)
           this.temperature = Number(parseFloat(JSON.parse(String(temp))[0]).toFixed(2)); // 转换为数值
         } else {
           console.error('返回的数据不足30个');
@@ -232,7 +232,6 @@ export default {
 };
 </script>
 
-  
 <style scoped>
 .metric-card {
   text-align: center;
@@ -250,5 +249,3 @@ export default {
   flex-direction: column;
 }
 </style>
-
-  
