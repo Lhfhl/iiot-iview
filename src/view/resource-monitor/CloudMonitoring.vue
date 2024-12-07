@@ -634,7 +634,7 @@ export default {
             }
         },
         openGrafana() {
-            window.open('http://10.112.184.214:32000/d/ItkMV59Sz/node-exporter-nodes?orgId=1&refresh=30s', '_blank');
+            window.open('http://10.112.184.214:32000/d/KcJk_u7Hz/node-exporter-nodes?orgId=1&refresh=30s', '_blank');
         }
     },
     beforeDestroy() {

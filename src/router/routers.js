@@ -45,7 +45,7 @@ export default [
           title: '产线定制',
           notCache: true
         },
-        component: () => import('@/view/ef/panel.vue')
+        component: () => import('@/view/ef/node-red.vue')
       }
     ]
   },
