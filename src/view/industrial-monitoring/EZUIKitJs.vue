@@ -77,6 +77,40 @@ export default {
         console.log("promise 获取 数据", data);
       });
     },
+    // capturePicture() {
+    //   var capturePicturePromise = player.capturePicture(`${new Date().getTime()}`);
+    //   capturePicturePromise.then((data) => {
+    //     console.log("promise 获取 数据", data);
+    //     // 使用 base64 数据创建 Blob 对象
+    //     const base64Data = data.data.base64;
+    //     const blob = this.dataURItoBlob(base64Data);
+
+    //     // 创建一个下载链接并触发下载
+    //     const url = URL.createObjectURL(blob);
+    //     const link = document.createElement('a');
+    //     link.href = url;
+    //     link.download = data.data.fileName; // 使用返回的文件名
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    //     URL.revokeObjectURL(url); // 释放URL对象
+    //   }).catch((error) => {
+    //     console.error('Capture picture error:', error);
+    //   });
+    // },
+
+    // // 将 data URI 转换为 Blob 对象
+    // dataURItoBlob(dataURI) {
+    //   // 将 base64 字符串转换为 ArrayBuffer
+    //   const byteString = atob(dataURI.split(',')[1]);
+    //   const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+    //   const ab = new ArrayBuffer(byteString.length);
+    //   const ia = new Uint8Array(ab);
+    //   for (let i = 0; i < byteString.length; i++) {
+    //     ia[i] = byteString.charCodeAt(i);
+    //   }
+    //   return new Blob([ab], {type: mimeString});
+    // },
     openSound() {
       var openSoundPromise = player.openSound();
       openSoundPromise.then((data) => {
