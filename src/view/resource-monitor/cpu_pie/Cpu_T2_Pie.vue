@@ -57,7 +57,7 @@ export default {
 .circle {
   fill: none;
   stroke-width: 3.8;
-  stroke: #00acc1;
+  stroke: #007BFF;
   stroke-linecap: round;
   transition: stroke-dasharray 0.6s ease 0s;
 }

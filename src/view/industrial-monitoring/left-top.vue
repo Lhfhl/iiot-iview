@@ -1,4 +1,3 @@
-
 <template>
   <Echart id="leftCenter" :options="options" class="left_center_inner" v-if="pageflag" ref="charts" />
   <Reacquire v-else @onclick="getData" style="line-height:200px">
