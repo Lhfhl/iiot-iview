@@ -121,7 +121,7 @@
                         :dataJ="kctdNet_upSpeed"
                         :dataK="t2Net_upSpeed"
                         :dataL="t3Net_upSpeed"
-                        :legendData="负载"/>
+                        legendData="负载"/>
 
                     </el-card>
                 </el-col>
@@ -134,7 +134,7 @@
                         :dataJ="kctdDisk_writeSpeed"
                         :dataK="t2Disk_writeSpeed"
                         :dataL="t3Disk_writeSpeed"
-                        :legendData="负载"/>
+                        legendData="负载"/>
 
                     </el-card>
                 </el-col>

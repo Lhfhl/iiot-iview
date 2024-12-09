@@ -28,8 +28,11 @@
     </div>
 
     <!-- 模型生产线 -->
-    <h2>模型生产线</h2>
-    <div class="production-line info-block">
+    <h2>信息模型</h2>
+    <pre style="background: #f9f9f9; padding: 15px; border: 1px solid #ddd; overflow-x: auto;" class="basic-info info-block">
+      <code v-html="highlightedXml"></code>
+    </pre>
+    <!-- <div class="production-line info-block">
     <div class="step-grid">
       <div v-for="(step, index) in lineDetail" :key="index" class="step-item">
         <div class="step-content">
@@ -41,83 +44,60 @@
         </div>
       </div>
     </div>
-    </div>
+    </div> -->
 </div>
 </template>
 
 <script>
+import hljs from "highlight.js/lib/core";
+import xml from "highlight.js/lib/languages/xml";
+import "highlight.js/styles/github.css";
+
 const axios = require('axios');
 
 export default {
   data() {
     return {
+      highlightedXml: "", // 保存高亮后的 XML 内容
       showTable: false,
       modelInfo: {}, // 初始化模型信息对象
       lineDetail: [],
-      pipeline: [{
-          class:"铣床",
-          process: "路径参数设置",
-         url: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3535650726,1744382531&fm=199&app=68&f=JPEG?w=750&h=750&s=B291356064A682BE9AA928160100D0E2",
-          seen: "true",
-        },
-        {class:"料库",
-          process: "订单出库",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1925937780,3311737653&fm=199&app=68&f=JPEG?w=750&h=750&s=3D8870334E377388CEC814C70100A0A0",
-          seen: "true",
-        },
-        {class:"料库",
-          process: "料库>>>铣床",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2565862764,3139638590&fm=199&app=68&f=JPEG?w=640&h=640&s=02B0632266C7B3AFFA18C1B6010050E2",
-          seen: "true",
-        },
-        {class:"铣床",
-          process: "铣床加工",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3900055160,970367034&fm=199&app=68&f=JPEG?w=640&h=640&s=11B8EC3044E667ABEF311DC70100E0E1",
-          seen: "true",
-        },
-        {class:"铣床",
-          process: "铣床>>>车床",
-          url: "https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=2252806894,2420454989&fm=199&app=68&f=JPEG?w=640&h=640&s=479AE52208B74FA91B3989D7010080E2",
-          seen: "true",
-        },
-        {class:"车床",
-          process: "车床加工",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2565862764,3139638590&fm=199&app=68&f=JPEG?w=640&h=640&s=02B0632266C7B3AFFA18C1B6010050E2",
-          seen: "true",
-        },
-        {class:"车床",
-          process: "车床>>>检测",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1925937780,3311737653&fm=199&app=68&f=JPEG?w=750&h=750&s=3D8870334E377388CEC814C70100A0A0",
-          seen: "true",
-        },
-        {class:"检测",
-          process: "视觉检测",
-          url: "https://jmy-pic.baidu.com/0/pic/-1105111569_1549761291_1684186752.png",
-          seen: "true",
-        },
-        {class:"组装",
-          process: "组装",
-          url: "https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=3900055160,970367034&fm=199&app=68&f=JPEG?w=640&h=640&s=11B8EC3044E667ABEF311DC70100E0E1",
-          seen: "true",
-        },
-        {class:"铣床",
-          process: "入库",
-          url: "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=3535650726,1744382531&fm=199&app=68&f=JPEG?w=750&h=750&s=B291356064A682BE9AA928160100D0E2",
-          seen: "true",
-        },
-     
-    ],
+      id: 0
     };
   },
   created() {
     // 获取路由传递的 ID
     const id = this.$route.query.id;
+    console.log("Model ID:", id);
     // 获取模型信息
     this.fetchModelInfo(id);
   },
+  mounted() {
+    this.loadXmlFile();
+  },
   methods: {
+    loadXmlFile() {
+      const xmlFilePath = this.searchByID(); // 指定 XML 文件路径
+      fetch(xmlFilePath)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.text();
+        })
+        .then((data) => {
+          // 使用新的 highlight.js 方法
+          hljs.registerLanguage('xml', xml);
+          const result = hljs.highlight(data, { language: 'xml' });
+          this.highlightedXml = result.value;
+        })
+        .catch((error) => {
+          console.error("Error loading XML file:", error);
+        });
+    },
     async fetchModelInfo(id) {
       try {
+        this.id = id;
         const url = `/api/admin/model/getById?id=${id}`;
         const response = await axios.get(url);
         //分割产线字符串
@@ -147,8 +127,15 @@ export default {
       }
       // 如果未找到匹配的步骤，则返回 null 或者其他适当的值
       return null;
-    }
+    },
 
+    searchByID() {
+      if (this.id === 1) {
+        return "/xml/IM.xml";
+      } else {
+        return "/xml/IM2.xml";
+      }
+    }
   }
 };
 </script>
