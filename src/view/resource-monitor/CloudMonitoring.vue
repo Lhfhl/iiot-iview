@@ -5,12 +5,78 @@
                 <h2 style="margin-right: 1em;">点击查看资源详情：</h2>
                 <button class="btn"  style="width: auto;" @click="openGrafana">Grafana</button>
             </div>
-            <!-- cpu和memory -->
-            <el-row :gutter="30" style="margin-top: 20px;">
 
-                <el-col :span="11">
+             <!-- cpu和memory -->
+             <el-row :gutter="10" style="margin-top: 20px;">
+                <el-col :span="12">
+                    <!-- cpu -->
+                    <el-card>
+                        <div slot="header" type="flex" align="middle" justify="center">
+                            <h2>CPU负载</h2>
+                        </div>
+
+                        <el-row :gutter="20">
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >kctd</h3>
+                                    <Cpukctd :progress="cpu_kctd"/>
+                                </el-card>
+                            </el-col>
+
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >t2</h3>
+                                    <CpuT1 :progress="cpu_t2"/>
+                                </el-card>
+                            </el-col>
+
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >t3</h3>
+                                    <CpuT2 :progress="cpu_t3"/>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </el-col>
+
+                <el-col :span="12">
                     <!-- memory -->
                     <el-card>
+                        <div slot="header" type="flex" align="middle" justify="center">
+                            <h2>Memory负载</h2>
+                        </div>
+
+                        <el-row :gutter="20">
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >kctd</h3>
+                                    <Memorykctd :progress="memory_kctd"/>
+                                </el-card>
+                            </el-col>
+
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >t2</h3>
+                                    <MemoryT1 :progress="memory_t2"/>
+                                </el-card>
+                            </el-col>
+
+                            <el-col :span="8">
+                                <el-card shadow="hover" class="cpu_memory_pie">
+                                    <h3 class="h" >t3</h3>
+                                    <MemoryT2 :progress="memory_t3"/>
+                                </el-card>
+                            </el-col>
+                        </el-row>
+                    </el-card>
+                </el-col>
+            </el-row>
+
+            <!-- cpu和memory曲线 -->
+            <el-row :gutter="30" style="margin-top: 20px;">
+                <el-col :span="12">
+                    <!-- <el-card>
                         <raddar-chart
                         :indicators="chartIndicators"
                         :cpu_kctd="cpu_kctd"
@@ -21,85 +87,24 @@
                         :memory_t3="memory_t3"
                         :legendData="负载"
                         />
-                    </el-card>
+                    </el-card> -->
 
                     <el-card style="margin-top: 20px;">
-                        <bar-chart :dataA="cpu_kctd"
+                        <cpu-chart :dataA="cpu_kctd"
                         :dataB="cpu_t2"
                         :dataC="cpu_t3"
-                        :dataD="memory_kctd"
-                        :dataE="memory_t3"
-                        :dataF="memory_t2"
                          />
                     </el-card>
                 </el-col>
 
-                <el-col :span="13">
+                <el-col :span="12">
                     <!-- cpu -->
-                    <el-card>
-                        <div slot="header" type="flex" align="middle" justify="center">
-                            <h2>负载情况</h2>
-                        </div>
-
-                        <el-row :gutter="20">
-                            <el-col :span="20">
-                                <h4>CPU负载:</h4>
-                                <div class="cpu_memory_row">
-                                    <!-- kctd -->
-                                    <div class="cpu_memory_item">
-                                        <h3 class="h">kctd</h3>
-                                        <Cpukctd :progress="cpu_kctd" :style="{ width: '190px', height: '190px'}" />
-                                    </div>
-
-                                    <!-- t2 -->
-                                    <div class="cpu_memory_item">
-                                        <h3 class="h">t2</h3>
-                                        <CpuT1 :progress="cpu_t2" :style="{ width: '190px', height: '190px' }" />
-                                    </div>
-
-                                    <!-- t3 -->
-                                    <div class="cpu_memory_item">
-                                        <h3 class="h">t3</h3>
-                                        <CpuT2 :progress="cpu_t3" :style="{ width: '190px', height: '190px' }" />
-                                    </div>
-                                </div>
-                            </el-col>
-
-                            <el-col :span="20">
-                                <h4>Memory负载</h4>
-                                <div class="cpu_memory_row">
-                                    <!-- kctd -->
-                                    <div class="cpu_memory_item1">
-                                        <h3 class="h">kctd</h3>
-                                        <Memorykctd :progress="memory_kctd"  :style="{ width: '190px', height: '190px' }"/>
-                                    </div>
-
-                                    <!-- t2 -->
-                                    <div class="cpu_memory_item1">
-                                        <h3 class="h">t2</h3>
-                                        <MemoryT1 :progress="memory_t2" :style="{ width: '190px', height: '190px' }"/>
-                                    </div>
-                                    <!-- t3 -->
-                                    <div class="cpu_memory_item1">
-                                        <h3 class="h">t3</h3>
-                                        <MemoryT2 :progress="memory_t3" :style="{ width: '190px', height: '190px' }"/>
-                                    </div>
-                                </div>
-                            </el-col>
-                            <!-- <el-col :span="8">
-                                <el-card shadow="hover" class="cpu_memory_pie">
-                                    <h3 class="h" >t2</h3>
-                                    <Cpukctd :progress="cpu_t2"/>
-                                </el-card>
-                            </el-col>
-
-                            <el-col :span="8">
-                                <el-card shadow="hover" class="cpu_memory_pie">
-                                    <h3 class="h" >t3</h3>
-                                    <Cpukctd :progress="cpu_t3"/>
-                                </el-card>
-                            </el-col> -->
-                        </el-row>
+                    <el-card style="margin-top: 20px;">
+                      <memory-chart
+                        :dataA="memory_kctd"
+                        :dataB="memory_t3"
+                        :dataC="memory_t2"
+                         />
                     </el-card>
                 </el-col>
 
@@ -110,12 +115,19 @@
                 <!-- 空 -->
                 <el-col :span="12">
                     <el-card>
-                        <line-chart :dataA="kctdNet_downSpeed"
-                        :dataB="t2Net_downSpeed"
-                        :dataC="t3Net_downSpeed"
-                        :dataD="kctdNet_upSpeed"
-                        :dataE="t2Net_upSpeed"
-                        :dataF="t3Net_upSpeed"
+                        <net-chart :dataG="kctdNet_downSpeed"
+                        :dataH="t2Net_downSpeed"
+                        :dataI="t3Net_downSpeed"
+                        :dataJ="kctdNet_upSpeed"
+                        :dataK="t2Net_upSpeed"
+                        :dataL="t3Net_upSpeed"
+                        :legendData="负载"/>
+
+                    </el-card>
+                </el-col>
+                <el-col :span="12">
+                    <el-card>
+                        <disk-chart
                         :dataG="kctdDisk_readSpeed"
                         :dataH="t2Disk_readSpeed"
                         :dataI="t3Disk_readSpeed"
@@ -124,190 +136,6 @@
                         :dataL="t3Disk_writeSpeed"
                         :legendData="负载"/>
 
-                    </el-card>
-                </el-col>
-
-                <el-col :span="12">
-                    <!-- 网络磁盘速率展示 -->
-                    <el-card>
-                        <div slot="header" type="flex" align="middle" justify="center">
-                            <h2>网络上下行速率/磁盘读取写入速度</h2>
-                        </div>
-
-                        <el-row :gutter="5">
-
-                             <!-- 下行速率 -->
-                             <el-col :span="6">
-                                <el-card type="flex" align="middle" justify="center" shadow="hover">
-                                    <h3>下行速率</h3>
-                                    <el-divider></el-divider>
-                                    <el-card shadow="never" class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="kctdNet_downSpeed"
-                                                title="kctd"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t2Net_downSpeed"
-                                                title="t2"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t3Net_downSpeed"
-                                                title="t3"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-                                </el-card>
-                            </el-col>
-
-                            <!-- 上行速率 -->
-                            <el-col :span="6">
-                                <el-card type="flex" align="middle" justify="center" shadow="hover">
-                                    <h3>上行速率</h3>
-                                    <el-divider></el-divider>
-                                    <el-card shadow="never" class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="kctdNet_upSpeed"
-                                                title="kctd"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t2Net_upSpeed"
-                                                title="t2"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t3Net_upSpeed"
-                                                title="t3"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-                                </el-card>
-                            </el-col>
-
-                            <!-- 读取速度 -->
-                            <el-col :span="6">
-                                <el-card type="flex" align="middle" justify="center" shadow="hover">
-                                    <h3>读取速度</h3>
-                                    <el-divider></el-divider>
-                                    <el-card shadow="never" class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="kctdDisk_readSpeed"
-                                                title="kctd"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t2Disk_readSpeed"
-                                                title="t2"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t3Disk_readSpeed"
-                                                title="t3"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-                                </el-card>
-                            </el-col>
-
-                            <!-- 写入速度 -->
-                            <el-col :span="6">
-                                <el-card shadow="hover">
-                                    <h3 type="flex" align="middle" justify="center">写入速度</h3>
-                                    <el-divider></el-divider>
-                                    <el-card shadow="never" class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="kctdDisk_writeSpeed"
-                                                title="kctd"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t2Disk_writeSpeed"
-                                                title="t2"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-
-                                    <el-card shadow="never" style="margin-top: 10px;"  class="statistic">
-                                        <div>
-                                            <el-statistic
-                                                group-separator=","
-                                                :precision="2"
-                                                :value="t3Disk_writeSpeed"
-                                                title="t3"
-                                                suffix="MB/s"
-                                            ></el-statistic>
-                                        </div>
-                                    </el-card>
-                                </el-card>
-                            </el-col>
-                        </el-row>
                     </el-card>
                 </el-col>
             </el-row>
@@ -323,9 +151,12 @@ import CpuT2 from "@/view/resource-monitor/cpu_pie/Cpu_T2_Pie.vue"
 import Memorykctd from "@/view/resource-monitor/memory_pie/Memory_Kctd_Pie.vue"
 import MemoryT1 from "@/view/resource-monitor/memory_pie/Memory_T1_Pie.vue"
 import MemoryT2 from "@/view/resource-monitor/memory_pie/Memory_T2_Pie.vue"
-import LineChart from './component/LineChart.vue'
-import RaddarChart from './component/RaddarChart.vue'
-import BarChart from './component/BarChart.vue'
+// import LineChart from './component/LineChart.vue'
+// import RaddarChart from './component/RaddarChart.vue'
+import MemoryChart from './component/MemoryLineChart.vue'
+import CpuChart from './component/CpuLineChart.vue'
+import DiskChart from './component/DiskLineChart.vue'
+import NetChart from './component/NetLineChart.vue'
 import axios from 'axios';
 // const link_cpu_kctd = 'sum((1-sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="kctd"}[5m]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="kctd"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="kctd", mode="system"}))'
 // const url = `/cloud/api/v1/query?query=${link_cpu_kctd}`
@@ -338,9 +169,11 @@ export default {
     Memorykctd,
     MemoryT1,
     MemoryT2,
-    BarChart,
-    LineChart,
-    RaddarChart
+    CpuChart,
+    DiskChart,
+    NetChart,
+    MemoryChart
+    // RaddarChart
   },
   data() {
     return {
@@ -839,7 +672,6 @@ h4 {
 
 .cpu_memory_pie {
     font-weight: bold;
-    width: 800px;
     border: 1.5px solid #B3D4FC;
 }
 
