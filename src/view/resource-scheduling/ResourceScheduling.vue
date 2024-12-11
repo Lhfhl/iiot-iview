@@ -25,7 +25,7 @@
                 <el-form-item label="调度器：" prop="scheduler">
                   <el-select v-model="form.scheduler" placeholder="请选择" :teleported="false">
                     <el-option label="k8s-default" :value="1"></el-option>
-                    <el-option label="edge-sceduler" :value="0"></el-option>
+                    <el-option label="edge-scheduler" :value="0"></el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="云边调度：" prop="scheduler_positon">

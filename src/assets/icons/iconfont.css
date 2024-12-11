@@ -13,12 +13,23 @@
        url('iconfont1.ttf?t=1731301317153') format('truetype');
 }
 
+@font-face {
+  font-family: "iconfont"; /* Project id 4517509 */
+  src: url('iconfont_user.woff2?t=1733899233559') format('woff2'),
+       url('iconfont_user.woff?t=1733899233559') format('woff'),
+       url('iconfont_user.ttf?t=1733899233559') format('truetype');
+}
+
 .iconfont {
   font-family:"iconfont" !important;
   font-size:16px;
   font-style:normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-user1:before {
+  content: "\e957";
 }
 
 .icon-bear:before { content: "\e600"; }

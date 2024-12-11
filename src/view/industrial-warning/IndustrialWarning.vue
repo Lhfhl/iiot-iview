@@ -84,20 +84,6 @@
     </el-row>
 
     <el-row style="margin-top: 15px;" :gutter="20">
-      <el-col :span="10">
-        <el-card style="height: auto; display: flex; flex-direction: column; align-items: center;">
-          <!-- 标题部分 -->
-          <div style="text-align: center; margin-bottom: 10px;">
-            <h3>安全头盔检测</h3>
-          </div>
-          <!-- 图片部分 -->
-          <el-image
-            :src="safety_helmet_identification_url"
-            fit="contain"
-          />
-        </el-card>
-      </el-col>
-
       <el-col :span="14">
           <el-card >
             <!-- 标题部分 -->
@@ -117,6 +103,19 @@
               </el-statistic>
             </div>
           </el-card>
+      </el-col>
+      <el-col :span="10">
+        <el-card style="height: auto; display: flex; flex-direction: column; align-items: center;">
+          <!-- 标题部分 -->
+          <div style="text-align: center; margin-bottom: 10px;">
+            <h3>安全头盔检测</h3>
+          </div>
+          <!-- 图片部分 -->
+          <el-image
+            :src="safety_helmet_identification_url"
+            fit="contain"
+          />
+        </el-card>
       </el-col>
     </el-row>
   </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="chart-container">
     <!-- 蓝色字体标题 -->
-    <h3 class="chart-title">CPU负载情况</h3>
+    <h3 class="chart-title">Memory负载情况</h3>
     <div ref="chartContainer" :class="className" :style="{height: height, width: width}"></div>
   </div>
 </template>
