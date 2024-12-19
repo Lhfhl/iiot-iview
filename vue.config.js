@@ -47,6 +47,14 @@ module.exports = {
           '^/api': ''
         }
       },
+      '/enviroment-api': {
+        'target': 'http://10.112.196.200:19001/api',
+        'changeOrigin': true,
+        'ws': true,
+        'pathRewrite': {
+          '^/enviroment-api': ''
+        }
+      },
       '/cloud': {
         'target': 'http://10.112.184.214:30091/api',
         'changeOrigin': true,
@@ -61,6 +69,6 @@ module.exports = {
           '^/schedulerfront': ''
         }
       }
-    },
+    }
   }
 }

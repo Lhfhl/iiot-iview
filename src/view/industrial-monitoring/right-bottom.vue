@@ -1,245 +1,158 @@
 <template>
-    <div
-      v-if="pageflag"
-      class="left_boottom_wrap beautify-scroll-def"
-      :class="{ 'overflow-y-auto': !sbtxSwiperFlag }"
-    >
-      <component :is="components" :data="list" :class-option="defaultOption">
-        <ul class="left_boottom">
-          <li class="left_boottom_item" v-for="(item, i) in list" :key="i">
-            <span class="orderNum doudong">{{ i + 1 }}</span>
-            <div class="inner_right">
-              <div class="dibu"></div>
-              <div class="flex">
-                <div class="info">
-                  <span class="labels">设备ID：</span>
-                  <span class="contents zhuyao doudong wangguan">
-                    {{ item.gatewayno }}</span
-                  >
-                </div>
-                <div class="info">
-                  <span class="labels">时间：</span>
-                  <span class="contents " style="font-size: 12px">
-                    {{ item.createTime }}</span
-                  >
-                </div>
-              </div>
-
-                <span
-                  class="types doudong"
-                  :class="{
-                    typeRed: item.onlineState == 0,
-                    typeGreen: item.onlineState == 1,
-                  }"
-                  >{{ item.onlineState == 1 ? "上线" : "下线" }}</span
-                >
-
-              <div class="info addresswrap">
-                <span class="labels">设备信息：</span>
-                <span class="contents ciyao" style="font-size: 12px">
-                  {{ deviceinformation(item) }}</span
-                >
-              </div>
-            </div>
-          </li>
-        </ul>
-      </component>
+  <div class="progress-container">
+    <div class="progress-box">
+      <h3>先车后铣</h3>
+      <div class="nodes">
+        <template v-for="(node, index) in process1">
+          <!-- 节点 -->
+          <div
+            class="node"
+            :key="'process1-node-' + index"
+            :class="{ active: progress1 >= index + 1 }"
+          >
+            <span>{{ node }}</span>
+          </div>
+          <!-- 自定义箭头图标 -->
+          <div
+            v-if="index < process1.length - 1"
+            class="arrow"
+            :key="'process1-arrow-' + index"
+          >
+            <img
+              src="@/assets/icons/arrowhead.svg"
+              alt="arrow"
+            />
+          </div>
+        </template>
+      </div>
     </div>
 
-    <Reacquire v-else @onclick="getData" style="line-height: 200px" />
-  </template>
+    <div class="progress-box">
+      <h3>先铣后车</h3>
+      <div class="nodes">
+        <template v-for="(node, index) in process2">
+          <!-- 节点 -->
+          <div
+            class="node"
+            :key="'process2-node-' + index"
+            :class="{ active: progress2 >= index + 1 }"
+          >
+            <span>{{ node }}</span>
+          </div>
+          <!-- 自定义箭头图标 -->
+          <div
+            v-if="index < process2.length - 1"
+            class="arrow"
+            :key="'process2-arrow-' + index"
+          >
+            <img
+              src="@/assets/icons/arrowhead.svg"
+              alt="arrow"
+              :class="{ active: progress2 > index + 1 }"
+            />
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</template>
 
-<script>
-import { currentGET } from "../../api/Largescreen/index";
-import vueSeamlessScroll from "vue-seamless-scroll"; // vue2引入方式
-import Kong from "../../components/kong/kong.vue";
-export default {
-  components: { vueSeamlessScroll, Kong },
-  data() {
-    return {
-      list: [],
-      pageflag: true,
-      components: vueSeamlessScroll,
-      defaultOption: {
-        ...this.$store.state.setting.defaultOption,
-        singleHeight: 240,
-        limitMoveNum: 5,
-        step: 0,
-      },
-    };
-  },
-  computed: {
-    sbtxSwiperFlag() {
-      let sbtxSwiper = this.$store.state.setting.sbtxSwiper;
-      if (sbtxSwiper) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.components = vueSeamlessScroll;
-      } else {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.components = Kong;
-      }
-      return sbtxSwiper;
-    },
-  },
-  created() {
+<script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 
-  },
+// 节点数据
+const process1 = ref(["订单出库", "车床加工", "铣床加工", "视觉检测", "组装"]);
+const process2 = ref(["订单出库", "铣床加工", "车床加工", "视觉检测", "组装"]);
 
-  mounted() {
-    this.getData();
-  },
-  methods: {
-    deviceinformation(item) {
-      let name = item.deviceinformation;
+// 模拟后端传来的进度数据
+const progress1 = ref(0); // 先车后铣，保持常暗
+const progress2 = ref(0); // 先铣后车，动态变化
 
-      return name;
-    },
-    getData() {
-      this.pageflag = true;
-      // this.pageflag =false
-      currentGET("big3", { limitNum: 20 }).then((res) => {
-        console.log("设备提醒", res);
-        if (res.success) {
-          this.countUserNumData = res.data;
-          this.list = res.data.list;
-          let timer = setTimeout(() => {
-            clearTimeout(timer);
-            this.defaultOption.step =
-                this.$store.state.setting.defaultOption.step;
-          }, this.$store.state.setting.defaultOption.waitTime);
-        } else {
-          this.pageflag = false;
-          this.$Message({
-            text: res.msg,
-            type: "warning",
-          });
-        }
-      });
-    },
-  },
+let intervalId = null;
+
+// 自动更新进度
+const startProgress = () => {
+  intervalId = setInterval(() => {
+    if (progress2.value < process2.value.length) {
+      progress2.value++;
+    } else {
+      progress2.value = 0; // 重置进度
+    }
+  }, 5000); // 每5秒更新一次进度
 };
+
+// 生命周期钩子
+onMounted(() => {
+  startProgress();
+});
+
+onUnmounted(() => {
+  clearInterval(intervalId); // 清除定时器
+});
 </script>
-  <style  scoped>
-  .left_boottom_wrap {
-    overflow: hidden;
-    width: 100%;
-    height: 95%;
-  }
 
-  .doudong {
-    overflow: hidden;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    backface-visibility: hidden;
-  }
+<style scoped>
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0.5rem;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77); /* 蓝黑渐变背景 */
+  border-radius: 10px;
+}
 
-  .overflow-y-auto {
-    overflow-y: auto;
-  }
+.progress-box {
+  border: 1px solid #2b3a5a;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.5);
+  background-color: #1b263b;
+}
 
-  .left_boottom {
-    width: 100%;
-    height: 100%;
-  }
+h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #a6c4e0;
+  font-weight: bold;
+}
 
-  .left_boottom .left_boottom_item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    font-size: 14px;
-    margin: 10px 0;
-  }
+.nodes {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .left_boottom .left_boottom_item .orderNum {
-    margin: 0 16px 0 -20px;
-  }
+.node {
+  width: 120px;
+  height: 50px;
+  border: 2px solid #3a506b;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1e3a5f;
+  color: #9bb1d6;
+  font-weight: bold;
+  transition: all 0.5s ease-in-out;
+}
 
-  .left_boottom .left_boottom_item .info {
-    margin-right: 10px;
-    display: flex;
-    align-items: center;
-    color: #fff;
-  }
+.node.active {
+  background-color: #0077b6;
+  color: #e0f7fa;
+  border-color: #0077b6;
+  box-shadow: 0px 0px 12px rgba(0, 119, 182, 0.8);
+}
 
-  .left_boottom .left_boottom_item .info .labels {
-    flex-shrink: 0;
-    font-size: 12px;
-    color: rgba(255, 255, 255, 0.6);
-  }
+.arrow img {
+  width: 30px;
+  height: 30px;
+  filter: brightness(0.6) sepia(1) hue-rotate(160deg) saturate(5); /* 蓝色调 */
+  transition: all 0.5s ease-in-out;
+}
 
-  .left_boottom .left_boottom_item .info .zhuyao {
-    color: #0072ff; /* 替换 $primary-color 变量 */
-    font-size: 15px;
-  }
-
-  .left_boottom .left_boottom_item .info .ciyao {
-    color: rgba(255, 255, 255, 0.8);
-  }
-
-  .left_boottom .left_boottom_item .info .warning {
-    color: #e6a23c;
-    font-size: 15px;
-  }
-
-  .left_boottom .left_boottom_item .inner_right {
-    position: relative;
-    height: 100%;
-    width: 380px;
-    flex-shrink: 0;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .left_boottom .left_boottom_item .inner_right .dibu {
-    position: absolute;
-    height: 2px;
-    width: 104%;
-    background-image: url("../../assets/img/zuo_xuxian.png");
-    bottom: -10px;
-    left: -2%;
-    background-size: cover;
-  }
-
-  .left_boottom .left_boottom_item .inner_right .addresswrap {
-    width: 100%;
-    display: flex;
-    margin-top: 8px;
-  }
-
-  .left_boottom .left_boottom_item .wangguan {
-    color: #1890ff;
-    font-weight: 900;
-    font-size: 15px;
-    width: 80px;
-    flex-shrink: 0;
-  }
-
-  .left_boottom .left_boottom_item .time {
-    font-size: 12px;
-    color: #fff;
-  }
-
-  .left_boottom .left_boottom_item .address {
-    font-size: 12px;
-    cursor: pointer;
-  }
-
-  .left_boottom .left_boottom_item .types {
-    width: 30px;
-    flex-shrink: 0;
-  }
-
-  .left_boottom .left_boottom_item .typeRed {
-    color: #fc1a1a;
-  }
-
-  .left_boottom .left_boottom_item .typeGreen {
-    color: #29fc29;
-  }
-
-  </style>
+.arrow img.active {
+  filter: brightness(1) saturate(2);
+  transform: scale(1.1); /* 箭头点亮时放大 */
+}
+</style>

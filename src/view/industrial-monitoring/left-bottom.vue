@@ -1,251 +1,91 @@
 
 <template>
-  <div
-    v-if="pageflag"
-    class="left_boottom_wrap beautify-scroll-def"
-    :class="{ 'overflow-y-auto': !sbtxSwiperFlag }"
-  >
-    <component :is="components" :data="list" :class-option="defaultOption">
-      <ul class="left_boottom">
-        <li class="left_boottom_item" v-for="(item, i) in list" :key="i">
-          <span class="orderNum doudong">{{ i + 1 }}</span>
-          <div class="inner_right">
-            <div class="dibu"></div>
-            <div class="flex">
-              <div class="info">
-                <span class="labels">设备ID：</span>
-                <span class="contents zhuyao doudong wangguan">
-                  {{ item.gatewayno }}</span
-                >
-              </div>
-              <div class="info">
-                <span class="labels">时间：</span>
-                <span class="contents " style="font-size: 12px">
-                  {{ item.createTime }}</span
-                >
-              </div>
-            </div>
-
-              <span
-                class="types doudong"
-                :class="{
-                  typeRed: item.onlineState == 0,
-                  typeGreen: item.onlineState == 1,
-                }"
-                >{{ item.onlineState == 1 ? "上线" : "下线" }}</span
-              >
-
-            <div class="info addresswrap">
-              <span class="labels">地址：</span>
-              <span class="contents ciyao" style="font-size: 12px">
-                {{ addressHandle(item) }}</span
-              >
-            </div>
-          </div>
-        </li>
-      </ul>
-    </component>
+  <div class="chart-container">
+    <chart height="100%" width="100%"
+    :xAxisData="timestamps"
+    :seriesData="[temperatures,humidities, beam, stive]"
+    :seriesNames="['温度', '湿度', '光照', '粉尘']"
+    />
   </div>
-
-  <Reacquire v-else @onclick="getData" style="line-height: 200px" />
 </template>
 
 <script>
-import { currentGET } from "../../api/Largescreen/index";
-import vueSeamlessScroll from "vue-seamless-scroll"; // vue2引入方式
-import Kong from "../../components/kong/kong.vue";
+import Chart from '@/components/charts/LineMarker'
+import { currentGET } from '../../api/Largescreen/index'
+
 export default {
-  components: { vueSeamlessScroll, Kong },
+  name: 'LineChart',
+  components: { Chart },
   data() {
     return {
-      list: [],
-      pageflag: true,
-      components: vueSeamlessScroll,
-      defaultOption: {
-        ...this.$store.state.setting.defaultOption,
-        singleHeight: 240,
-        limitMoveNum: 5,
-        step: 0,
-      },
+      timestamps: [], // 存储时间部分
+      temperatures: [], // 存储温度值
+      humidities: [], // 存储湿度值
+      stive: [50, 50, 40, 50, 40, 50, 40, 30, 30, 30],
+      beam: [50, 40, 50, 40, 50, 40, 30, 30, 30, 60],
+      timer: null, // 定时器
     };
   },
-  computed: {
-    sbtxSwiperFlag() {
-      let sbtxSwiper = this.$store.state.setting.sbtxSwiper;
-      if (sbtxSwiper) {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.components = vueSeamlessScroll;
-      } else {
-        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.components = Kong;
-      }
-      return sbtxSwiper;
-    },
-  },
   created() {
-
+    this.getData(); // 初始化获取数据
+    this.startMonitoring(); // 开启实时监控
   },
-
-  mounted() {
-    this.getData();
+  beforeDestroy() {
+    this.stopMonitoring(); // 清理定时器
   },
   methods: {
-    addressHandle(item) {
-      let name = item.provinceName;
-      if (item.cityName) {
-        name += "/" + item.cityName;
-        if (item.countyName) {
-          name += "/" + item.countyName;
-        }
-      }
-      return name;
-    },
-    getData() {
-      this.pageflag = true;
-      // this.pageflag =false
-      currentGET("big3", { limitNum: 20 }).then((res) => {
-        console.log("设备提醒", res);
-        if (res.success) {
-          this.countUserNumData = res.data;
-          this.list = res.data.list;
-          let timer = setTimeout(() => {
-            clearTimeout(timer);
-            this.defaultOption.step =
-              this.$store.state.setting.defaultOption.step;
-          }, this.$store.state.setting.defaultOption.waitTime);
+    async getData() {
+      try {
+        const res = await currentGET("big7");
+        console.log("接口返回数据：", res); // 打印调试信息
+
+        // 判断返回是否为数组
+        if (res.code === 1) {
+          const data = res.data;
+          // 提取数据
+          this.timestamps = data.map(item => item.timestamp.split(' ')[1]); // 提取时间部分
+          this.temperatures = data.map(item => item.temperature); // 提取温度
+          this.humidities = data.map(item => item.humidity); // 提取湿度
+
+          // console.log("成功提取数据：", {
+          //   timestamps: this.timestamps,
+          //   temperatures: this.temperatures,
+          //   humidities: this.humidities,
+          // });
+          console.log("时间数组 (timestamps):", this.timestamps);
+          console.log("温度数组 (temperatures):", this.temperatures);
+          console.log("湿度数组 (humidities):", this.humidities);
         } else {
-          this.pageflag = false;
-          this.$Message({
-            text: res.msg,
-            type: "warning",
-          });
+          console.error("请求失败，返回数据不是数组：", res);
+          this.$Message.warning("请求失败，返回数据格式异常");
         }
-      });
+      } catch (error) {
+        // 捕获请求过程中的错误
+        console.error("接口请求错误：", error);
+        this.$Message.error("接口请求错误，请检查网络或后端服务！");
+      }
+    },
+
+    startMonitoring() {
+      if (this.timer) return; // 防止重复启动定时器
+      this.timer = setInterval(() => {
+        this.getData(); // 定时获取数据
+      }, 5000); // 每隔 5 秒获取一次数据（可根据需求调整间隔）
+    },
+    stopMonitoring() {
+      if (this.timer) {
+        clearInterval(this.timer); // 清除定时器
+        this.timer = null;
+      }
     },
   },
 };
 </script>
-<style  scoped>
-.left_boottom_wrap {
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-}
 
-.doudong {
-  overflow: hidden;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.overflow-y-auto {
-  overflow-y: auto;
-}
-
-.left_boottom {
-  width: 100%;
-  height: 100%;
-}
-
-.left_boottom .left_boottom_item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  font-size: 14px;
-  margin: 10px 0;
-}
-
-.left_boottom .left_boottom_item .orderNum {
-  margin: 0 16px 0 -20px;
-}
-
-.left_boottom .left_boottom_item .info {
-  margin-right: 10px;
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-
-.left_boottom .left_boottom_item .info .labels {
-  flex-shrink: 0;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.left_boottom .left_boottom_item .info .zhuyao {
-  color: #0072ff; /* 替换 $primary-color 变量 */
-  font-size: 15px;
-}
-
-.left_boottom .left_boottom_item .info .ciyao {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.left_boottom .left_boottom_item .info .warning {
-  color: #e6a23c;
-  font-size: 15px;
-}
-
-.left_boottom .left_boottom_item .inner_right {
+<style scoped>
+.chart-container {
   position: relative;
-  height: 100%;
-  width: 380px;
-  flex-shrink: 0;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.left_boottom .left_boottom_item .inner_right .dibu {
-  position: absolute;
-  height: 2px;
-  width: 104%;
-  background-image: url("../../assets/img/zuo_xuxian.png");
-  bottom: -10px;
-  left: -2%;
-  background-size: cover;
-}
-
-.left_boottom .left_boottom_item .inner_right .addresswrap {
   width: 100%;
-  display: flex;
-  margin-top: 8px;
+  height: 100%;
 }
-
-.left_boottom .left_boottom_item .wangguan {
-  color: #1890ff;
-  font-weight: 900;
-  font-size: 15px;
-  width: 80px;
-  flex-shrink: 0;
-}
-
-.left_boottom .left_boottom_item .time {
-  font-size: 12px;
-  color: #fff;
-}
-
-.left_boottom .left_boottom_item .address {
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.left_boottom .left_boottom_item .types {
-  width: 30px;
-  flex-shrink: 0;
-}
-
-.left_boottom .left_boottom_item .typeRed {
-  color: #fc1a1a;
-}
-
-.left_boottom .left_boottom_item .typeGreen {
-  color: #29fc29;
-}
-
 </style>

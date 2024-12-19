@@ -1,6 +1,6 @@
 let UtilVar = {
   ENC: false, // 返回结果是否加密
-  baseUrl: process.env.VUE_APP_BASE_API,
+  baseUrl: 'http://10.112.196.200:19001/api',
   code: 401
 }
 

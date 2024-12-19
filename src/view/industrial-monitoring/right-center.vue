@@ -16,7 +16,7 @@
                   <span class="contents "> {{ item.terminalno }}</span>
                 </div>
                 <div class="info">
-                  <span class="labels">订单号：</span>
+                  <span class="labels1">订单号：</span>
                   <span class="contents warning"> {{ item.value | montionFilter }}</span>
                 </div>
               </div>
@@ -28,7 +28,7 @@
                   <span class="contents ciyao" style="font-size:12px"> {{ item.provinceName }}/{{ item.cityName }}/{{ item.countyName }}</span>
                 </div>
                 <div class="info time">
-                  <span class="labels">时间：</span>
+                  <span class="labels1">时间：</span>
                   <span class="contents" style="font-size:12px"> {{ item.createtime }}</span>
                 </div>
 
@@ -133,7 +133,7 @@ export default {
 .right_center .right_center_item .inner_right {
     position: relative;
     height: 100%;
-    width: 400px;
+    width: 550px;
     flex-shrink: 0;
     line-height: 1.5;
 }
@@ -155,6 +155,14 @@ export default {
 }
 
 .right_center .right_center_item .info .labels {
+    margin-left: 20px;
+    flex-shrink: 0;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.labels1 {
+    margin-left: 50px;
     flex-shrink: 0;
     font-size: 12px;
     color: rgba(255, 255, 255, 0.6);

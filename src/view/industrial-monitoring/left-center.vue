@@ -3,48 +3,40 @@
     <li class="user_Overview-item" style="color: #00fdfa">
       <div class="user_Overview_nums allnum">
         <img class="icon1" src="@/assets/icons/tem.svg" alt="温度图标" />
-        <!-- <dv-digital-flop :config="config" style="width: auto; height: 100%;" /> -->
-      </div>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;温度&nbsp;&nbsp;&nbsp;</p>
-      <div class="user_Overview_nums1 allnum1">
-        <dv-digital-flop :config="config" style="width: auto; height: 100%;" />
+        <p class="label-text">温度</p>
+        <div class="number-text">
+          <dv-digital-flop :config="config" style="width: auto; height: 100%;" />
+        </div>
       </div>
     </li>
-    <hr />
     <li class="user_Overview-item" style="color: #07f7a8">
       <div class="user_Overview_nums humidity">
         <img class="icon" src="@/assets/icons/humidity.svg" alt="湿度图标" />
-        <!-- <dv-digital-flop :config="humidityconfig" style="width: auto; height: 100%;" /> -->
-      </div>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;湿度&nbsp;&nbsp;&nbsp;</p>
-      <div class="user_Overview_nums1 allnum1">
-        <dv-digital-flop :config="humidityconfig" style="width: auto; height: 100%;" />
+        <p class="label-text">湿度</p>
+        <div class="number-text">
+          <dv-digital-flop :config="humidityconfig" style="width: auto; height: 100%;" />
+        </div>
       </div>
     </li>
-    <hr />
     <li class="user_Overview-item" style="color: #e3b337">
       <div class="user_Overview_nums dust">
         <img class="icon" src="@/assets/icons/dust.svg" alt="粉尘图标" />
-      </div>
-      <p>粉尘情况</p>
-      <div class="user_Overview_nums1 allnum1">
-        <dv-digital-flop :config="dustconfig" style="width: auto; height: 100%;" />
+        <p class="label-text">粉尘</p>
+        <div class="number-text">
+          <dv-digital-flop :config="dustconfig" style="width: auto; height: 100%;" />
+        </div>
       </div>
     </li>
-    <hr />
     <li class="user_Overview-item" style="color: #f5023d">
       <div class="user_Overview_nums beam">
         <img class="icon" src="@/assets/icons/beam.svg" alt="光照图标" />
-      </div>
-      <p>光照情况</p>
-      <div class="user_Overview_nums1 allnum1">
-        <dv-digital-flop :config="beamconfig" style="width: auto; height: 100%;" />
+        <p class="label-text">光照</p>
+        <div class="number-text">
+          <dv-digital-flop :config="beamconfig" style="width: auto; height: 100%;" />
+        </div>
       </div>
     </li>
   </ul>
-  <Reacquire v-else @onclick="getData" line-height="200px">
-    重新获取
-  </Reacquire>
 </template>
 
 <script>
@@ -59,7 +51,7 @@ export default {
       userOverview: {
         alarmNum: 0,
         dustNum: 0,
-        humidityNum: 0,
+        humidity: 0, // 标记
         temperatureNum: 0,
       },
       pageflag: true,
@@ -130,15 +122,15 @@ export default {
         if (!this.timer) {
           console.log("环境参数", res);
         }
-        if (res.success) {
+        if (res.code) {
           this.userOverview = res.data;
           this.humidityconfig = {
             ...this.humidityconfig,
-            number: [res.data.humidityNum]
+            number: [res.data.humidity]// 标记
           }
           this.config = {
             ...this.config,
-            number: [res.data.temperatureNum]
+            number: [res.data.temperature]
           }
           this.dustconfig = {
             ...this.dustconfig,
@@ -170,136 +162,78 @@ export default {
 </script>
 <style scoped>
 .user_Overview {
-  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px; /* 四部分之间的间距 */
   padding: 0;
   margin: 0;
-  width: 500px;
-}
-
-.user_Overview hr {
-  border: none;
-  border-top: 1px solid #ccc;
-  margin: 10px 0;
   width: 100%;
 }
 
-.user_Overview li {
+.user_Overview-item {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 20px;
-  margin-bottom: 30px;
-}
-
-.user_Overview li:first-child {
-  margin-top: 17px;
-}
-
-.user_Overview li p {
-  margin: 0;
-  margin-left: 20px;
-  font-size: 16px;
-  color: #fff;
-}
-
-.user_Overview li .user_Overview_nums {
-  width: 100px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
-  font-size: 22px;
-  position: relative;
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.user_Overview li .user_Overview_nums img.icon {
+.user_Overview_nums {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+}
+
+.user_Overview_nums img.icon,
+.user_Overview_nums img.icon1 {
   position: absolute;
-  width: 40px; /* 图标大小 */
+  width: 40px;
   height: 40px;
-  z-index: 1; /* 确保图标显示在圆圈内 */
+  z-index: 1; /* 图标显示在背景上 */
 }
 
-.user_Overview li .user_Overview_nums img.icon1 {
-  position: absolute;
-  width: 48px; /* 图标大小 */
-  height: 48px;
-  z-index: 1; /* 确保图标显示在圆圈内 */
-}
-
-.user_Overview li .user_Overview_nums .dv-digital-flop {
-  margin-left: 70px; /* 数据距离图标右移 */
-  z-index: 2; /* 确保数据显示在图标右侧 */
-}
-
-.user_Overview li .user_Overview_nums.allnum::before {
+.user_Overview_nums::before {
   content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.allnum::before {
   background-image: url("../../assets/img/left_top_lan.png");
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0; /* 确保背景圆圈在底层 */
 }
 
-.user_Overview li .user_Overview_nums.humidity::before {
-  content: '';
+.humidity::before {
   background-image: url("../../assets/img/left_top_lv.png");
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
 
-.user_Overview li .user_Overview_nums.dust::before {
-  content: '';
+.dust::before {
   background-image: url("../../assets/img/left_top_huang.png");
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
 
-.user_Overview li .user_Overview_nums.beam::before {
-  content: '';
+.beam::before {
   background-image: url("../../assets/img/left_top_hong.png");
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0;
 }
 
-.user_Overview li .user_Overview_nums1 {
-  width: 200px;
-  height: 100px;
-  text-align: center;
-  line-height: 100px;
-  font-size: 22px;
-  position: relative;
-  background-size: cover;
-  background-position: center center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.label-text {
+  position: absolute;
+  top: -15px;
+  right: -60px;
+  font-size: 14px;
+  color: inherit;
 }
 
-.user_Overview li .user_Overview_nums.allnum1::before {
-  content: '';
+.number-text {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 0; /* 确保背景圆圈在底层 */
+  bottom: -20px;
+  right: -60px;
+  font-size: 18px;
+  color: inherit;
 }
 </style>

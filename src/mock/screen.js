@@ -24,8 +24,6 @@ function countDeviceNum () {
 // 接口，第一个参数url，第二个参数请求类型，第三个参数响应回调
 Mock.mock(new RegExp('countDeviceNum'), 'get', countDeviceNum)
 
-// /设备总览
-
 function environmentNum () {
   const a = Mock.mock({
     success: true,
@@ -41,7 +39,7 @@ function environmentNum () {
   return a
 }
 
-Mock.mock(new RegExp('environmentNum'), 'get', environmentNum)
+// Mock.mock(new RegExp('environmentNum'), 'get', environmentNum)标记
 
 // /设备提醒
 
@@ -51,7 +49,7 @@ function sbtx () {
     data: {
       'list|20': [
         {
-          'deviceinformation|1': ['拼接', '切割', '制作'],
+          'deviceinformation|1': ['湿度异常', '温度异常'],
           createTime: "@datetime('yyyy-MM-dd HH:mm:ss')",
           deviceId: '6c512d754bbcd6d7cd86abce0e0cac58',
           'gatewayno|+1': 10000,
@@ -139,8 +137,8 @@ function information () {
         // sbInfo: '孔明锁',
         'terminalno|+1': 100,
         provinceName: '北京市',
-        cityName: '海淀区',
-        countyName: '北太平庄'
+        cityName: '大兴区',
+        countyName: '综测所'
       }]
 
     }
