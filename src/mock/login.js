@@ -5,7 +5,7 @@ const USER_MAP = {
     user_id: '1',
     access: ['super_admin', 'admin'],
     token: 'super_admin',
-    avator: 'iconfont icon-icon'
+    avator: 'iconfont icon-user1'
   },
   admin: {
     name: 'admin',

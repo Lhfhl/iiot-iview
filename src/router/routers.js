@@ -27,25 +27,26 @@ export default [
     component: () => import('@/view/login/login.vue')
   },
   {
-    // 产线定制
+    // 订单管理
     path: '/',
-    name: '_line-customization',
-    redirect: '/line-customization',
+    name: '_order-management',
+    redirect: '/order-management',
     meta: {
       icon: 'md-menu',
-      title: '产线定制'
+      title: '订单管理',
+      hide: true
     },
     component: Main,
     children: [
       {
-        path: 'line-customization',
-        name: 'line-customization',
+        path: 'order-management',
+        name: 'order-management',
         meta: {
           icon: 'md-funnel',
-          title: '产线定制',
+          title: '订单管理',
           notCache: true
         },
-        component: () => import('@/view/ef/node-red.vue')
+        component: () => import('@/view/order-manage/OrderManage.vue')
       }
     ]
   },
@@ -74,25 +75,26 @@ export default [
     ]
   },
   {
-    // 订单管理
-    path: '/order-management',
-    name: '_order-management',
+    // 产线定制
+    path: '/line-customization',
+    name: '_line-customization',
+    // redirect: '/line-customization',
     meta: {
+      hide: true,
       icon: 'md-menu',
-      title: '订单管理',
-      hide: true
+      title: '产线定制'
     },
     component: Main,
     children: [
       {
-        path: 'ordermanagement',
-        name: 'ordermanagement',
+        path: 'line-customization',
+        name: 'line-customization',
         meta: {
           icon: 'md-funnel',
-          title: '订单管理',
+          title: '产线定制',
           notCache: true
         },
-        component: () => import('@/view/order-manage/OrderManage.vue')
+        component: () => import('@/view/ef/node-red.vue')
       }
     ]
   },

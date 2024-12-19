@@ -1,0 +1,671 @@
+
+<?xml version="1.0"?>
+<GIMDEVICE xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" _NAME="" _NodeName="" _IsNode="false">
+  <GIMFileHeader>
+    <Version>1.0</Version>
+    <Revision>1.0</Revision>
+    <Creator>LB</Creator>
+    <CreateTime>20241125</CreateTime>
+    <LastModifiedPerson>LB</LastModifiedPerson>
+    <LastModifyTime>20241125</LastModifyTime>
+  </GIMFileHeader>
+  <GIMDeviceTypeDescription>
+    <GIMSetInfoType>
+      <SetInfoName>KongMingLockProductLine</SetInfoName>
+      <SetInfoID ID="5c4dc63d-4106-4749-bfac-f6294c264a91">900</SetInfoID>
+      <SetInfoDes>孔明锁产线</SetInfoDes>
+    </GIMSetInfoType>
+    <GIMStaticAttributeSet>
+      <GIMSetInfoType>
+        <SetInfoName>StaticAttributeSet</SetInfoName>
+        <SetInfoID ID="18ae858b-1b0c-4641-a7f8-8273cd470722">90001</SetInfoID>
+        <SetInfoDes>静态属性集合</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMAttributeList>
+        <GIMAttribute>
+          <AttributeID ID="e17ff1c8-3d24-4e72-afa6-f38ec9beb996">9000101</AttributeID>
+          <AttributeName>ProductName</AttributeName>
+          <AttributeDes>产线名称</AttributeDes>
+          <AttributeAccess>0</AttributeAccess>
+          <AttributeDataType>11</AttributeDataType>
+          <AttributeValue xsi:type="xsd:string">KongMingLockProductLine</AttributeValue>
+          <LValue>0</LValue>
+          <HValue>0</HValue>
+          <SamplingInterval>0</SamplingInterval>
+        </GIMAttribute>
+      </GIMAttributeList>
+    </GIMStaticAttributeSet>
+    <GIMProcessAttributeSet>
+      <GIMSetInfoType>
+        <SetInfoName>ProcessAttributeSet</SetInfoName>
+        <SetInfoID ID="e0549efe-9e15-4365-bf2b-93e19c8f5ee4">90002</SetInfoID>
+        <SetInfoDes>过程属性集合</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMAttributeList />
+    </GIMProcessAttributeSet>
+    <GIMConfigurationAttributeSet>
+      <GIMSetInfoType>
+        <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+        <SetInfoID ID="a678a518-e666-4e74-9638-84060c7e32fe">90003</SetInfoID>
+        <SetInfoDes>配置属性集合</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMAttributeList>
+        <GIMAttribute>
+          <AttributeID ID="5e1047cd-d509-4a18-b409-d87728078616">9000303</AttributeID>
+          <AttributeName>ProductLineSta</AttributeName>
+          <AttributeDes>产线状态</AttributeDes>
+          <AttributeAccess>0</AttributeAccess>
+          <AttributeDataType>0</AttributeDataType>
+          <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+          <LValue>0</LValue>
+          <HValue>0</HValue>
+          <SamplingInterval>0</SamplingInterval>
+        </GIMAttribute>
+      </GIMAttributeList>
+    </GIMConfigurationAttributeSet>
+    <ComponentSetType>
+      <GIMSetInfoType>
+        <SetInfoName>ComponentSet</SetInfoName>
+        <SetInfoID ID="52b2c9ca-73b1-4314-88c5-b20e0ea0d144">0</SetInfoID>
+        <SetInfoDes>组件集合</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMRefencedListInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>LibraryFeeding</ReferencedName>
+          <ReferencedID ID="e37b86fa-ff7a-4282-9787-3544fb332584">1</ReferencedID>
+          <XmlFilePath>料库上料</XmlFilePath>
+        </GIMRefencedInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>Milling</ReferencedName>
+          <ReferencedID ID="a0b7a16a-e70e-444b-9e33-83dcd611ea78">3</ReferencedID>
+          <XmlFilePath>铣削加工</XmlFilePath>
+        </GIMRefencedInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>Tuning</ReferencedName>
+          <ReferencedID ID="2aa007f6-2629-4783-b58a-3a9853b5f1cd">2</ReferencedID>
+          <XmlFilePath>车削加工</XmlFilePath>
+        </GIMRefencedInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>QualityDetection</ReferencedName>
+          <ReferencedID ID="53c03910-3033-4fc3-8b1f-78b9c196d120">10</ReferencedID>
+          <XmlFilePath>质量检测</XmlFilePath>
+        </GIMRefencedInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>Assembly</ReferencedName>
+          <ReferencedID ID="8927c227-a70f-45ee-bc99-ba40ad2d0223">1004</ReferencedID>
+          <XmlFilePath>装配组装</XmlFilePath>
+        </GIMRefencedInfo>
+        <GIMRefencedInfo>
+          <ReferencedName>AGV</ReferencedName>
+          <ReferencedID ID="57595bb5-6966-4956-91a5-593998a872d1">100404</ReferencedID>
+          <XmlFilePath>AGV</XmlFilePath>
+        </GIMRefencedInfo>
+      </GIMRefencedListInfo>
+    </ComponentSetType>
+  </GIMDeviceTypeDescription>
+  <GIMComponentDescription>
+    <Component_LibraryFeeding_1>
+      <GIMSetInfoType>
+        <SetInfoName>LibraryFeeding</SetInfoName>
+        <SetInfoID ID="48d0371e-592f-43cc-bd5b-93aa9a12d43c">1</SetInfoID>
+        <SetInfoDes>料库上料</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="c9ed4f85-1ce1-4c0c-a91e-74b5925ad28d">910</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="a81bad84-1c91-4f7d-b6d9-9dc3d7ec8338">9101</AttributeID>
+            <AttributeName>TargetCell</AttributeName>
+            <AttributeDes>取放件目标库号</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>8</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedLong">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="1ffcfb8c-bd92-4429-b0e7-4a42d40d3fac">9102</AttributeID>
+            <AttributeName>Cell</AttributeName>
+            <AttributeDes>库分类</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="82602136-4590-445f-aa0f-dd9bc35168f4">912</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="1e1bf384-e087-47a3-bac6-6647446fd451">911</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="9ebdc033-bb67-4e99-9668-047e2fc817cc">9110</AttributeID>
+            <AttributeName>LibRunState</AttributeName>
+            <AttributeDes>仓储单元运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>11</AttributeDataType>
+            <AttributeValue xsi:type="xsd:string">MEB车间</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="6a56b6ec-a47e-4e4a-8449-8a5e954c8e5e">9111</AttributeID>
+            <AttributeName>LibWorkState</AttributeName>
+            <AttributeDes>仓储单元工作状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>11</AttributeDataType>
+            <AttributeValue xsi:type="xsd:string" />
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+      <ComponentSetType>
+        <GIMRefencedListInfo />
+      </ComponentSetType>
+    </Component_LibraryFeeding_1>
+    <Component_Tuning_2>
+      <GIMSetInfoType>
+        <SetInfoName>Tuning</SetInfoName>
+        <SetInfoID ID="c5f83c98-b3c8-4488-ae57-0842dca69a97">2</SetInfoID>
+        <SetInfoDes>车削加工</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="300a466a-95b8-4c25-9fe8-edc9ab1d0aac">920</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="7cef0dfb-1b5a-476c-8354-004285d9304b">9202</AttributeID>
+            <AttributeName>RotateState</AttributeName>
+            <AttributeDes>接驳台旋转</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="b9bdb6f5-e1fd-4189-b1bb-27dff5a42111">9203</AttributeID>
+            <AttributeName>Pos</AttributeName>
+            <AttributeDes>接驳台举升</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="aded912a-48b7-465b-84a2-6b5cd954ea24">922</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="ecfda8d4-1138-4713-8d31-15a46567697b">921</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="15617d2b-5030-464e-90c4-15e8b364d43e">9210</AttributeID>
+            <AttributeName>LatheRunState</AttributeName>
+            <AttributeDes>车床单元运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="0edaf216-945a-4b1d-8426-356ff4a8bff3">9211</AttributeID>
+            <AttributeName>LatheWorkState</AttributeName>
+            <AttributeDes>车床工作状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>11</AttributeDataType>
+            <AttributeValue xsi:type="xsd:string" />
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="a52b3d26-7e7e-4deb-9f95-04da9675d624">9212</AttributeID>
+            <AttributeName>DoorState</AttributeName>
+            <AttributeDes>门状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+      <ComponentSetType>
+        <GIMRefencedListInfo />
+      </ComponentSetType>
+    </Component_Tuning_2>
+    <Component_Milling_3>
+      <GIMSetInfoType>
+        <SetInfoName>Milling</SetInfoName>
+        <SetInfoID ID="aff214d8-54d5-43d3-b93d-4a3191da4d83">3</SetInfoID>
+        <SetInfoDes>铣削加工</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="21acf2ef-9992-42b1-b2db-6b24782c06cd">930</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="080c03db-d26a-4432-afb7-08a3cdf20cbf">9303</AttributeID>
+            <AttributeName>RotateState</AttributeName>
+            <AttributeDes>接驳台旋转</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="02f6c6e4-fc90-4f17-aaff-3bdea6ed3b50">9304</AttributeID>
+            <AttributeName>Pos</AttributeName>
+            <AttributeDes>接驳台举升</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="5d26ae6e-724d-4b60-b47c-dc4eeb2af629">932</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="ef9c9a0b-5828-4b13-a59a-646fbbd45781">931</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="e7d01dc2-aa57-4b4c-b44c-0dc3acbc99b4">9311</AttributeID>
+            <AttributeName>MillerRunState</AttributeName>
+            <AttributeDes>铣床单元运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="9d2712c7-bb66-41b2-a193-e9f17e2709ba">9312</AttributeID>
+            <AttributeName>MillerWorkState</AttributeName>
+            <AttributeDes>铣床单元工作状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="27873668-05a7-4d39-a119-fe8d98d7011b">9313</AttributeID>
+            <AttributeName>DoorState</AttributeName>
+            <AttributeDes>门状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+    </Component_Milling_3>
+    <Component_QualityDetection_10>
+      <GIMSetInfoType>
+        <SetInfoName>QualityDetection</SetInfoName>
+        <SetInfoID ID="656c980a-5658-4207-9b93-8642a10b9ff6">10</SetInfoID>
+        <SetInfoDes>质量检测</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="172460cb-8f77-4cb0-a75d-6f058c2234a7">1001</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="33ef36a8-47b4-4e49-a797-f532feb2f27c">100101</AttributeID>
+            <AttributeName>RotateState</AttributeName>
+            <AttributeDes>接驳台旋转</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="1d188e51-1e9b-49b2-9063-a13d086496f0">100102</AttributeID>
+            <AttributeName>Pos</AttributeName>
+            <AttributeDes>接驳台举升</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="e3fb6b1c-c851-48c9-b612-032f16833911">100103</AttributeID>
+            <AttributeName>currentPicture</AttributeName>
+            <AttributeDes>当前图片编号</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>8</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedLong">10</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="e577e7d5-eb93-48b1-bd92-bea8e4b6983b">1002</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="282b1e8b-79bc-49d9-94d6-4547fcf7a17e">1003</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="06ee3e7e-3254-4c4d-bee0-40fbbad8f022">10031</AttributeID>
+            <AttributeName>CheckRunState</AttributeName>
+            <AttributeDes>检测单元运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="44ff04c1-3b5a-46ec-98ac-1012b3eb81a9">10032</AttributeID>
+            <AttributeName>CheckWorkState</AttributeName>
+            <AttributeDes>检测单元工作状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="075e2d22-a6aa-4e8a-81a5-bea952f5b881">10033</AttributeID>
+            <AttributeName>RobotRunState</AttributeName>
+            <AttributeDes>机器人运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="a0c11a2a-9f3c-4173-a86b-3d073acec952">10034</AttributeID>
+            <AttributeName>CheckPass</AttributeName>
+            <AttributeDes>检测结果</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+      <ComponentSetType>
+        <GIMRefencedListInfo />
+      </ComponentSetType>
+    </Component_QualityDetection_10>
+    <Component_Assembly_1004>
+      <GIMSetInfoType>
+        <SetInfoName>Assembly</SetInfoName>
+        <SetInfoID ID="703a6fc4-1e48-48a4-ac19-11afa2d3f903">1004</SetInfoID>
+        <SetInfoDes>装配组装</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="9e6065f6-c0ba-4919-bdfc-b5b9da58c500">100401</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="dbd4dd3d-f261-4b74-87a3-b9ae406c2e33">10040101</AttributeID>
+            <AttributeName>RotateState</AttributeName>
+            <AttributeDes>接驳台旋转</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="25d1b64b-b096-4f8d-b4aa-73d8b164533c">10040102</AttributeID>
+            <AttributeName>Pos</AttributeName>
+            <AttributeDes>接驳台举升</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="803e7f30-555a-497f-ae1c-3d1b5860cf41">100402</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="6296e950-682f-4fc2-b70a-8eff760559e0">100403</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="0389234e-c23b-4d65-a799-9f1f4606624a">1004031</AttributeID>
+            <AttributeName>AssembleRunState</AttributeName>
+            <AttributeDes>检测单元运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="f83762b5-4c4e-4c22-8482-2a2899d253d3">1004032</AttributeID>
+            <AttributeName>AssembleWorkState</AttributeName>
+            <AttributeDes>检测单元工作状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="2e5ab6a5-86df-42c8-8fc3-caf20ad6ad5a">1004033</AttributeID>
+            <AttributeName>RobotRunState</AttributeName>
+            <AttributeDes>机器人运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="58749f6f-c505-4792-8461-3cdd29257f21">1004034</AttributeID>
+            <AttributeName>AssembleStation</AttributeName>
+            <AttributeDes>装配台状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+      <ComponentSetType>
+        <GIMRefencedListInfo />
+      </ComponentSetType>
+    </Component_Assembly_1004>
+    <Component_AGV_100404>
+      <GIMSetInfoType>
+        <SetInfoName>AGV</SetInfoName>
+        <SetInfoID ID="f04c08f9-ebc2-48eb-a514-b62ae3985a17">100404</SetInfoID>
+        <SetInfoDes>AGV</SetInfoDes>
+      </GIMSetInfoType>
+      <GIMStaticAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>StaticAttributeSet</SetInfoName>
+          <SetInfoID ID="f04c08f9-ebc2-48eb-a514-b62ae3985a17">10040401</SetInfoID>
+          <SetInfoDes>静态属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="fc8601af-bade-41c1-a63d-89858e5c306f">1004040101</AttributeID>
+            <AttributeName>Station</AttributeName>
+            <AttributeDes>当前所在站点</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="fc8601af-bade-41c1-a63d-89858e5c306f">1004040102</AttributeID>
+            <AttributeName>serviceStation</AttributeName>
+            <AttributeDes>当前服务工位</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMStaticAttributeSet>
+      <GIMProcessAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ProcessAttributeSet</SetInfoName>
+          <SetInfoID ID="f04c08f9-ebc2-48eb-a514-b62ae3985a17">10040402</SetInfoID>
+          <SetInfoDes>过程属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList />
+      </GIMProcessAttributeSet>
+      <GIMConfigurationAttributeSet>
+        <GIMSetInfoType>
+          <SetInfoName>ConfigurationAttributeSet</SetInfoName>
+          <SetInfoID ID="f04c08f9-ebc2-48eb-a514-b62ae3985a17">10040403</SetInfoID>
+          <SetInfoDes>配置属性集合</SetInfoDes>
+        </GIMSetInfoType>
+        <GIMAttributeList>
+          <GIMAttribute>
+            <AttributeID ID="fc8601af-bade-41c1-a63d-89858e5c306f">1004040301</AttributeID>
+            <AttributeName>AGVRunState</AttributeName>
+            <AttributeDes>小车运行状态</AttributeDes>
+            <AttributeAccess>0</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="fc8601af-bade-41c1-a63d-89858e5c306f">1004040302</AttributeID>
+            <AttributeName>Charging</AttributeName>
+            <AttributeDes>小车充电状态</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>0</AttributeDataType>
+            <AttributeValue xsi:type="xsd:boolean">false</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+          <GIMAttribute>
+            <AttributeID ID="fc8601af-bade-41c1-a63d-89858e5c306f">1004040303</AttributeID>
+            <AttributeName>ActionState</AttributeName>
+            <AttributeDes>小车工作状态</AttributeDes>
+            <AttributeAccess>1</AttributeAccess>
+            <AttributeDataType>4</AttributeDataType>
+            <AttributeValue xsi:type="xsd:unsignedShort">0</AttributeValue>
+            <LValue>0</LValue>
+            <HValue>0</HValue>
+            <SamplingInterval>0</SamplingInterval>
+          </GIMAttribute>
+        </GIMAttributeList>
+      </GIMConfigurationAttributeSet>
+    </Component_AGV_100404>
+  </GIMComponentDescription>
+  <GIMAttributeSetDescription />
+</GIMDEVICE>

@@ -79,18 +79,18 @@
         },
         
         async viewModel(id) {   //查看模型详情
-        try {
-          const url = `/api/admin/model/getById?id=${id}`;
-          const response = await axios.get(url);
-          this.modelInfo = response.data.data; // 将获取到的数据保存到组件数据中
-          //分割产线字符串
-          this.lineDetail = this.splitLineDetails();
-          this.$router.push({ name: 'modeldetail', query:{ id } });
-        } catch (error) {
-            console.error('获取模型信息失败', error);
-            // 添加失败提示，例如使用 Element UI 的 Message 组件
-            this.$message.error('获取模型信息失败，请稍后重试');
-        }
+          try {
+            const url = `/api/admin/model/getById?id=${id}`;
+            const response = await axios.get(url);
+            this.modelInfo = response.data.data; // 将获取到的数据保存到组件数据中
+            //分割产线字符串
+            this.lineDetail = this.splitLineDetails();
+            this.$router.push({ name: 'modeldetail', query:{ id } });
+          } catch (error) {
+              console.error('获取模型信息失败', error);
+              // 添加失败提示，例如使用 Element UI 的 Message 组件
+              this.$message.error('获取模型信息失败，请稍后重试');
+          }
         },
 
         async startProduction(id) {   // 开始生产

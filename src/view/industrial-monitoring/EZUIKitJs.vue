@@ -44,7 +44,7 @@ export default {
       player = new EZUIKit.EZUIKitPlayer({
         id: "video-container", // 视频容器ID
         accessToken:
-          "at.d0xwiuuhbj6afrn522d7iom74xa59r7v-7zqha6dw7v-0nfak4q-muwqt0uns",
+          "at.a8bbs23t9k56dsj5cn6699un5owkuivf-7i0fxnphq3-0kvxjck-9v9bjzcux",
         url: "ezopen://open.ys7.com/BC1950677/1.live",
         // validCode: "yzs123456789@",
         // simple: 极简版; pcLive: pc直播; pcRec: pc回放; mobileLive: 移动端直播; mobileRec: 移动端回放;security: 安防版; voice: 语音版;
