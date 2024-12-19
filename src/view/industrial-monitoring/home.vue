@@ -64,9 +64,9 @@ export default {
       weekday: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
       activeNav: "line-monitoring", // 定义导航激活状态
       nav: [ // 定义导航栏数据
-        { name: "line-customization", link: "", meta: { title: "产线定制" } },
+        { name: "order-management", link: "", meta: { title: "订单管理" } },
         { name: "line-monitoring", link: "", meta: { title: "产线监控" } },
-        { name: "ordermanagement", link: "", meta: { title: "订单管理" } },
+        { name: "line-customization", link: "", meta: { title: "产线定制" } },
         { name: "modelmanagement", link: "", meta: { title: "模型管理" } },
         { name: "resourcemonitoring", link: "", meta: { title: "资源管理" } },
         { name: "resourcescheduling", link: "", meta: { title: "资源调度" } },
