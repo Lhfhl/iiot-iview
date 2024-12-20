@@ -26,7 +26,7 @@
                     <div class="left_shu"> 实时监测</div>
                     <div class="setting_item">
                         <span class="setting_label">
-                            设备提醒自动轮询: <span class="setting_label_tip"></span>
+                            实时预警轮播: <span class="setting_label_tip"></span>
                         </span>
                         <div class="setting_content">
                             <el-radio-group v-model="sbtxradio" @change="(val) => radiochange(val, 'sbtxSwiper')">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="setting_item">
                         <span class="setting_label">
-                            实时预警轮播:
+                            订单信息轮询:
                         </span>
                         <div class="setting_content">
                             <el-radio-group v-model="ssyjradio" @change="(val) => radiochange(val, 'ssyjSwiper')">

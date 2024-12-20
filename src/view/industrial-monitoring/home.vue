@@ -1,4 +1,3 @@
-
 <template>
   <!-- <div id="index" ref="appRef" class="index_home" :class="{ pageisScale: isScale }"> -->
   <ScaleScreen
@@ -20,6 +19,8 @@
               <span class="title-text">工业产线可视化监控</span>
             </div>
           </div>
+          <!-- 导航栏区域 -->
+          <main-nav :nav="nav" :activeNav="activeNav" class="main-nav" />
           <div class="timers">
             {{ dateYear }} {{ dateWeek }} {{ dateDay }}
             <i
@@ -44,11 +45,13 @@
 import { formatTime } from "../../utils/index.js";
 import Setting from "./setting.vue";
 import ScaleScreen from "@/components/scale-screen/scale-screen.vue";
+import mainNav from "./mianNav.vue";
 
 export default {
   components: {
     Setting,
-    ScaleScreen
+    ScaleScreen,
+    mainNav,
   },
 
   data() {
@@ -59,6 +62,16 @@ export default {
       dateYear: null,
       dateWeek: null,
       weekday: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+      activeNav: "line-monitoring", // 定义导航激活状态
+      nav: [ // 定义导航栏数据
+        { name: "order-management", link: "", meta: { title: "订单管理" } },
+        { name: "line-monitoring", link: "", meta: { title: "产线监控" } },
+        { name: "line-customization", link: "", meta: { title: "产线定制" } },
+        { name: "modelmanagement", link: "", meta: { title: "模型管理" } },
+        { name: "resourcemonitoring", link: "", meta: { title: "资源管理" } },
+        { name: "resourcescheduling", link: "", meta: { title: "资源调度" } },
+        { name: "safetywarning", link: "", meta: { title: "工业安全预警" } },
+      ],
     };
   },
   filters: {
@@ -66,8 +79,6 @@ export default {
       return msg || 0;
     },
   },
-  computed: {},
-  created() {},
   mounted() {
     this.timeFn();
     this.cancelLoading();
@@ -100,5 +111,56 @@ export default {
 @import "./home.css";
 body {
   background-color: black; /* 设置背景为黑色 */
+}
+
+.full-screen-container {
+  position: relative;
+  background: -webkit-linear-gradient(left, #081a43, #0a3267, #071f56);
+}
+
+.full-screen-container .main-box {
+  padding: 0 1%;
+}
+
+.full-screen-container .ivu-layout-header .logo {
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
+  line-height: 2rem;
+  z-index: 901;
+  background-size: 100%;
+  padding: 0 6rem;
+  overflow: hidden;
+  height: 4rem;
+}
+
+.full-screen-container .ivu-layout-header .logo h1 {
+  color: #46abdd;
+  font-size: 1.6rem;
+  display: inline;
+  vertical-align: middle;
+  padding-left: 0.1rem;
+}
+
+.full-screen-container .ivu-layout-header .logo img {
+  width: 2rem;
+  vertical-align: middle;
+}
+
+.full-screen-container .main-nav {
+  background: transparent !important;
+}
+
+.full-screen-container .main-nav::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -1; /* 确保遮罩位于底层 */
 }
 </style>

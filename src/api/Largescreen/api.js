@@ -3,15 +3,13 @@
 /* eslint-disable no-unused-vars */
 
 /*
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2023-08-02 14:58:23
  * src\api\Largescreen\api.js
  */
 import axios from 'axios'
 // import UtilVar from '@/config/UtilVar'
 import router from '@/router'
 import config from '@/config'
-const baseUrl = process.env.NODE_ENV === 'development' ? config.baseUrl.dev : config.baseUrl.dev
+const baseUrl = '/enviroment-api'
 const CancelToken = axios.CancelToken
 export { baseUrl }
 // axios.defaults.withCredentials = true;
@@ -21,6 +19,8 @@ axios.interceptors.request.use(function (config) {
   let token = localStorage.getItem('token')
   config.headers.common['Content-Type'] = 'application/json;charset=utf-8'
   config.headers.common['token'] = token // Authorization
+  console.log('Request URL:', `${baseUrl}/temperature-humidity2`)
+
   return config
 }, function (error) {
   // 对请求错误做些什么

@@ -6,7 +6,7 @@
       <div class="you"></div>
     </div>
     <div class="mapwrap">
-      <dv-border-box-13>
+      <dv-border-box-13 style="padding: 0px;">
         <!-- 其他内容可以添加在这里 -->
         <EZUIKitJs class="EZUIKitJs"> </EZUIKitJs>
         <!-- 替换为您需要引用的内容 -->
@@ -41,14 +41,14 @@ export default {
 
 <style  scoped>
 .centermap {
-  margin-bottom: 30px;
+  margin-bottom: 0px;
 }
 
 .centermap .maptitle {
   height: 60px;
   display: flex;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 0px;
   box-sizing: border-box;
 }
 
@@ -80,7 +80,9 @@ export default {
 }
 
 .mapwrap {
-    height: 548px;
+  margin-top: -25px; /* 清除顶部间距 */
+  padding-top: 0; /* 清除内部边距 */
+    height: 568px;
     width: 100%;
     /* padding: 0 0 10px 0; */
     box-sizing: border-box;
@@ -89,10 +91,10 @@ export default {
 
 .EZUIKitJs {
   position: absolute;
-      right: 2.3%;
-      top: 5%;
-      width: 95%;
-      height: 90%;
+      right: 20px;
+      top: 20px;
+      width: 988px;
+      height: 530px;
       border: 1px solid #00eded;
       border-radius: 10px;
       color: #00f7f6;

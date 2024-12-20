@@ -3,12 +3,12 @@ import * as API from './api'
 
 export const paramType = {
   'big1': '/bigscreen/countDeviceNum', // 设备总览
-  'big2': '/bigscreen/environmentNum', // 环境参数
+  'big2': '/data/temperature-humidity', // 环境参数
   'big3': '/bigscreen/sbtx', // 设备提醒
   'big4': '/bigscreen/alarmNum', // 次数
   'big5': '/bigscreen/information', // 实时预警
-  'big6': '/bigscreen/producePlan' // 生产安排
-  // 'big7': '/bigscreen/information', // 订单信息
+  'big6': '/bigscreen/producePlan', // 生产安排
+  'big7': '/data/temperature-humidity2' // 订单信息
   // 'big8': '/bigscreen/centermap'// //中间地图
 
 }
