@@ -99,6 +99,32 @@ export default [
     ]
   },
   {
+    // node-red产线监控跳转
+    path: '/line-video',
+    name: '_line-video',
+    meta: {
+      hide: true,
+      icon: 'md-menu',
+      title: 'node-red产线监控',
+      hideInMenu: true
+    },
+    component: () => import('@/view/ef/line-video-main.vue'),
+    children: [
+      {
+        path: 'line-video',
+        name: 'line-video',
+        meta: {
+          icon: 'md-funnel',
+          title: 'node-red产线监控',
+          notCache: true,
+          hideInMenu: true,
+          hide: true
+        },
+        component: () => import('@/view/ef/line-video.vue')
+      }
+    ]
+  },
+  {
     // 模型管理
     path: '/model-management',
     name: '_model-management',
