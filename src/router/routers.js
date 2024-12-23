@@ -28,9 +28,8 @@ export default [
   },
   {
     // 订单管理
-    path: '/',
+    path: '/order-management',
     name: '_order-management',
-    redirect: '/order-management',
     meta: {
       icon: 'md-menu',
       title: '订单管理',
@@ -52,8 +51,9 @@ export default [
   },
   {
     // 产线监控
-    path: '/production-line-monitoring',
+    path: '/',
     name: 'production-line-monitoring',
+    redirect: '/line-monitoring',
     meta: {
       hide: true,
       icon: 'md-menu',

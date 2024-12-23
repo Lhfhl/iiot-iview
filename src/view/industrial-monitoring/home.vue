@@ -1,5 +1,4 @@
 <template>
-  <!-- <div id="index" ref="appRef" class="index_home" :class="{ pageisScale: isScale }"> -->
   <ScaleScreen
     :width="1920"
     :height="1080"
@@ -9,7 +8,7 @@
     <div class="bg">
       <dv-loading v-if="loading">Loading...</dv-loading>
       <div v-else class="host-body">
-        <!-- 头部 s -->
+        <!-- 头部 -->
         <div class="d-flex jc-center title_wrap">
           <div class="zuojuxing"></div>
           <div class="youjuxing"></div>
@@ -19,8 +18,14 @@
               <span class="title-text">工业产线可视化监控</span>
             </div>
           </div>
-          <!-- 导航栏区域 -->
-          <main-nav :nav="nav" :activeNav="activeNav" class="main-nav" />
+          <!-- 导航栏 -->
+          <main-nav
+            :nav="nav"
+            :activeNav="activeNav"
+            class="main-nav"
+            @update:activeNav="handleNavChange"
+          />
+          <!-- 时间 -->
           <div class="timers">
             {{ dateYear }} {{ dateWeek }} {{ dateDay }}
             <i
@@ -30,15 +35,12 @@
             ></i>
           </div>
         </div>
-        <!-- 头部 e-->
-        <!-- 内容  s-->
+        <!-- 内容区域 -->
         <router-view></router-view>
-        <!-- 内容 e -->
       </div>
     </div>
     <Setting ref="setting" />
   </ScaleScreen>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -62,10 +64,10 @@ export default {
       dateYear: null,
       dateWeek: null,
       weekday: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
-      activeNav: "line-monitoring", // 定义导航激活状态
-      nav: [ // 定义导航栏数据
-        { name: "order-management", link: "", meta: { title: "订单管理" } },
+      activeNav: this.$route.name || "line-monitoring", // 从路由初始化激活导航项
+      nav: [ // 导航数据
         { name: "line-monitoring", link: "", meta: { title: "产线监控" } },
+        { name: "order-management", link: "", meta: { title: "订单管理" } },
         { name: "line-customization", link: "", meta: { title: "产线定制" } },
         { name: "modelmanagement", link: "", meta: { title: "模型管理" } },
         { name: "resourcemonitoring", link: "", meta: { title: "资源管理" } },
@@ -74,23 +76,32 @@ export default {
       ],
     };
   },
-  filters: {
-    numsFilter(msg) {
-      return msg || 0;
-    },
-  },
   mounted() {
-    this.timeFn();
-    this.cancelLoading();
+    this.timeFn(); // 启动时间更新
+    this.cancelLoading(); // 模拟加载完成
+    this.syncActiveNav(); // 初始化时同步导航状态
+  },
+  watch: {
+    $route(to) {
+      this.syncActiveNav(); // 路由变化时同步导航状态
+    },
   },
   beforeDestroy() {
     clearInterval(this.timing);
   },
   methods: {
+    syncActiveNav() {
+      // 根据当前路由动态更新 activeNav
+      const routeName = this.$route.name;
+      if (this.nav.some(item => item.name === routeName)) {
+        this.activeNav = routeName;
+      }
+    },
     showSetting() {
-      this.$refs.setting.init();
+      this.$refs.setting.init(); // 打开设置窗口
     },
     timeFn() {
+      // 启动定时器，更新时间
       this.timing = setInterval(() => {
         this.dateDay = formatTime(new Date(), "HH: mm: ss");
         this.dateYear = formatTime(new Date(), "yyyy-MM-dd");
@@ -98,10 +109,16 @@ export default {
       }, 1000);
     },
     cancelLoading() {
+      // 模拟加载完成
       let timer = setTimeout(() => {
         this.loading = false;
         clearTimeout(timer);
       }, 500);
+    },
+    handleNavChange(newNav) {
+      // 子组件通知父组件激活的导航项
+      this.activeNav = newNav;
+      this.$router.push({ name: newNav }); // 跳转到对应路由
     },
   },
 };

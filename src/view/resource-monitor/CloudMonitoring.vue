@@ -7,9 +7,8 @@
             </div>
 
              <!-- cpu和memory -->
-             <el-row :gutter="10" style="margin-top: 20px;">
+             <!-- <el-row :gutter="10" style="margin-top: 5px;">
                 <el-col :span="12">
-                    <!-- cpu -->
                     <el-card>
                         <div slot="header" type="flex" align="middle" justify="center">
                             <h2>CPU负载</h2>
@@ -41,7 +40,6 @@
                 </el-col>
 
                 <el-col :span="12">
-                    <!-- memory -->
                     <el-card>
                         <div slot="header" type="flex" align="middle" justify="center">
                             <h2>Memory负载</h2>
@@ -71,10 +69,10 @@
                         </el-row>
                     </el-card>
                 </el-col>
-            </el-row>
+            </el-row> -->
 
             <!-- cpu和memory曲线 -->
-            <el-row :gutter="30" style="margin-top: 20px;">
+            <el-row :gutter="15" style="margin-top: 8px;">
                 <el-col :span="12">
                     <!-- <el-card>
                         <raddar-chart
@@ -89,7 +87,7 @@
                         />
                     </el-card> -->
 
-                    <el-card style="margin-top: 20px;">
+                    <el-card style="margin-top: 4px; height: 340px;">
                         <cpu-chart :dataA="cpu_kctd"
                         :dataB="cpu_t2"
                         :dataC="cpu_t3"
@@ -99,7 +97,7 @@
 
                 <el-col :span="12">
                     <!-- cpu -->
-                    <el-card style="margin-top: 20px;">
+                    <el-card style="margin-top: 4px; height: 340px;">
                       <memory-chart
                         :dataA="memory_kctd"
                         :dataB="memory_t3"
@@ -111,10 +109,10 @@
             </el-row>
 
             <!-- 网络和磁盘 -->
-            <el-row :gutter="10" style="margin-top: 20px;">
+            <el-row :gutter="15" style="margin-top: 8px;">
                 <!-- 空 -->
                 <el-col :span="12">
-                    <el-card>
+                    <el-card style="height: 383px;">
                         <net-chart :dataG="kctdNet_downSpeed"
                         :dataH="t2Net_downSpeed"
                         :dataI="t3Net_downSpeed"
@@ -126,7 +124,7 @@
                     </el-card>
                 </el-col>
                 <el-col :span="12">
-                    <el-card>
+                    <el-card style="height: 383px;">
                         <disk-chart
                         :dataG="kctdDisk_readSpeed"
                         :dataH="t2Disk_readSpeed"
@@ -530,7 +528,7 @@ export default {
 .network, .disk
  {
   flex: 1;
-  padding: 20px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px;
@@ -550,7 +548,7 @@ export default {
   flex-direction: column;
   justify-content:center;
   flex: 1;
-  padding: 20px;
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 10px;
@@ -673,6 +671,7 @@ h4 {
 .cpu_memory_pie {
     font-weight: bold;
     border: 1.5px solid #B3D4FC;
+    height: 150px;
 }
 
 .cpu_memory_row {
@@ -697,8 +696,8 @@ h4 {
 }
 
 .cpu_memory_item Cpukctd {
-    width: 140x; /* 设置组件宽度 */
-    height: 140px; /* 设置组件高度 */
+    width: 100x; /* 设置组件宽度 */
+    height: 100px; /* 设置组件高度 */
 }
 
 .cpu_memory_item1 {
@@ -714,8 +713,12 @@ h4 {
 }
 
 .cpu_memory_item1 Cpukctd {
-    width: 140x; /* 设置组件宽度 */
-    height: 140px; /* 设置组件高度 */
+    width: 100x; /* 设置组件宽度 */
+    height: 100px; /* 设置组件高度 */
 }
-
+.container
+{
+  margin-bottom: 0px;
+  margin-top: -3px;
+}
 </style>

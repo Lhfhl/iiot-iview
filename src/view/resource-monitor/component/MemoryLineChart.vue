@@ -51,6 +51,7 @@ export default {
       dataAHistory: [0, 0, 0, 0, 0, 0],
       dataBHistory: [0, 0, 0, 0, 0, 0],
       dataCHistory: [0, 0, 0, 0, 0, 0],
+      timestamps: ['00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00'], // 横坐标时间点
       updateInterval: 30000, // 每30秒更新一次
       timer: null, // 用于存储定时器
     };
@@ -95,6 +96,16 @@ export default {
 
     // 更新图表的数据
     updateData() {
+      // 获取当前时间并格式化
+      const now = new Date();
+      const formattedTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+
+      // 添加时间点到横坐标数组
+      this.timestamps.push(formattedTime);
+      if (this.timestamps.length > 7) {
+        this.timestamps.shift(); // 如果超过7个，移除最旧的时间点
+      }
+
       // 将新数据添加到历史数据数组末尾
       this.dataAHistory.push(this.dataA);
       this.dataBHistory.push(this.dataB);
@@ -161,14 +172,14 @@ export default {
 
       this.chart.setOption({
         xAxis: {
-          data: ['节点1', '节点2', '节点3', '节点4', '节点5', '节点6', '节点7'], // X轴数据固定顺序
+          data: this.timestamps, // 使用时间点作为横坐标
           boundaryGap: false,
           axisTick: { show: false }
         },
         grid: {
           left: 10,
           right: 10,
-          bottom: 0,
+          bottom: 57,
           top: 30,
           containLabel: true
         },
@@ -177,24 +188,22 @@ export default {
           axisPointer: { type: 'cross' },
           padding: [5, 10],
           formatter: (params) => {
-            // 顶部“节点n”文字居中
             let tooltipContent = `
-    <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">
-      ${params[0].axisValue}
-    </div>
-  `;
+              <div style="text-align: center; font-weight: bold; margin-bottom: 8px;">
+                ${params[0].axisValue} <!-- 时间点显示在顶部 -->
+              </div>
+            `;
             params.forEach((item) => {
               tooltipContent += `
-      <div style="display: flex; justify-content: space-between; align-items: center; min-width: 100px;">
-        <span style="display: inline-block; vertical-align: middle; margin-right: 10px;">${item.marker}</span>
-        <span style="flex: 1; text-align: left;">${item.seriesName}</span>
-        <span style="text-align: right; padding-left: 30px;">${item.value.toFixed(2)}%</span>
-      </div>
-    `;
+                <div style="display: flex; justify-content: space-between; align-items: center; min-width: 100px;">
+                  <span style="display: inline-block; vertical-align: middle; margin-right: 10px;">${item.marker}</span>
+                  <span style="flex: 1; text-align: left;">${item.seriesName}</span>
+                  <span style="text-align: right; padding-left: 30px;">${item.value.toFixed(2)}%</span>
+                </div>
+              `;
             });
             return tooltipContent;
-          },
-
+          }
         },
         yAxis: {
           axisTick: { show: false }
@@ -212,16 +221,17 @@ export default {
 <style scoped>
 .chart-container {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 0px;
 }
 
 .chart-title {
   color: #007bff; /* 设置标题为蓝色字体 */
   font-size: 24px; /* 设置字体大小 */
-  margin-bottom: 30px;
+  margin-bottom: -20px;
+  margin-top: -10px;
 }
 
 .chart-container div {
-  margin-top: 20px; /* 上外边距 */
+  margin-top: 15px; /* 上外边距 */
 }
 </style>

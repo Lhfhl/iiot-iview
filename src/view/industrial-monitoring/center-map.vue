@@ -7,39 +7,49 @@
     </div>
     <div class="mapwrap">
       <dv-border-box-13 style="padding: 0px;">
-        <!-- 其他内容可以添加在这里 -->
-        <EZUIKitJs class="EZUIKitJs"> </EZUIKitJs>
-        <!-- 替换为您需要引用的内容 -->
-        <!-- <div id="custom-map-container" style="width: 100%; height: 100%;"></div> -->
+        <div class="EZUIKitJs-container">
+          <EZUIKitJs ref="EZUIKitJs" class="EZUIKitJs" />
+        </div>
       </dv-border-box-13>
     </div>
   </div>
 </template>
 
 <script>
-import EZUIKitJs from "@/view/industrial-monitoring/EZUIKitJs.vue"
+import EZUIKitJs from "@/view/industrial-monitoring/EZUIKitJs.vue";
 
 export default {
-
   components: {
     EZUIKitJs,
   },
-
   data() {
     return {
-      maptitle: "产线实时监控",
+      maptitle: "产线实时监控", // 标题
     };
   },
+  mounted() {
+    // 强制初始化视频区域尺寸
+    this.resizeVideo();
+    window.addEventListener("resize", this.resizeVideo);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.resizeVideo);
+  },
   methods: {
-    returnToNational() {
-      console.log("");
-      // 如果需要自定义行为，可以在这里处理
+    resizeVideo() {
+      const videoContainer = this.$refs.EZUIKitJs?.$el.querySelector("#video-container");
+      const parent = this.$refs.EZUIKitJs?.$el.parentNode;
+
+      if (videoContainer && parent) {
+        videoContainer.style.width = `${parent.clientWidth}px`;
+        videoContainer.style.height = `${parent.clientHeight}px`;
+      }
     },
   },
 };
 </script>
 
-<style  scoped>
+<style scoped>
 .centermap {
   margin-bottom: 0px;
 }
@@ -80,30 +90,27 @@ export default {
 }
 
 .mapwrap {
-  margin-top: -25px; /* 清除顶部间距 */
-  padding-top: 0; /* 清除内部边距 */
-    height: 568px;
-    width: 100%;
-    /* padding: 0 0 10px 0; */
-    box-sizing: border-box;
-    position: relative;
+  margin-top: -25px;
+  padding-top: 0;
+  height: 568px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.EZUIKitJs-container {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 988px;
+  height: 530px;
+  border: 1px solid #00eded;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 237, 237, 0.5), 0 0 6px rgba(0, 237, 237, 0.4);
 }
 
 .EZUIKitJs {
-  position: absolute;
-      right: 20px;
-      top: 20px;
-      width: 988px;
-      height: 530px;
-      border: 1px solid #00eded;
-      border-radius: 10px;
-      color: #00f7f6;
-      text-align: center;
-      line-height: 26px;
-      letter-spacing: 6px;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 237, 237, 0.5),
-        0 0 6px rgba(0, 237, 237, 0.4);
+  width: 100%;
+  height: 100%;
 }
-
 </style>

@@ -4,26 +4,36 @@ export default {
   props: {
     nav: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     activeNav: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      currentActiveNav: this.activeNav // 使用 data 替代 ref
+      currentActiveNav: this.activeNav, // 初始值
     };
+  },
+  watch: {
+    activeNav(newVal) {
+      this.currentActiveNav = newVal; // 监听父组件更新
+    },
+    $route(to) {
+      this.currentActiveNav = to.name; // 路由变化时更新
+    },
   },
   methods: {
     tolink(name) {
-      this.currentActiveNav = name; // 更新激活的导航项
+      if (this.currentActiveNav === name) return; // 防止重复点击
+      this.currentActiveNav = name;
+      this.$emit("update:activeNav", name); // 通知父组件更新
       if (this.$router) {
-        this.$router.push({ name }); // 使用 this.$router 进行路由切换
+        this.$router.push({ name }); // 跳转路由
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

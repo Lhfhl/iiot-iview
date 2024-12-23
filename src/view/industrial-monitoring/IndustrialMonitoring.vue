@@ -72,7 +72,7 @@ export default {
     </div> -->
     <div class="contetn_center">
       <CenterMap class="contetn_center_top" />
-      <ItemWrap class="contetn_center-bottom" title="生产安排">
+      <ItemWrap class="contetn_center-bottom" title="环境信息">
         <LeftBottom />
       </ItemWrap>
     </div>
