@@ -38,12 +38,13 @@ export default [
     component: Main,
     children: [
       {
-        path: 'order-management',
-        name: 'order-management',
+        path: 'ordermanagement',
+        name: 'ordermanagement',
         meta: {
           icon: 'md-funnel',
           title: '订单管理',
-          notCache: true
+          notCache: true,
+          notTag: false
         },
         component: () => import('@/view/order-manage/OrderManage.vue')
       }

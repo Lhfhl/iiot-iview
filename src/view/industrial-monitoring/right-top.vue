@@ -136,7 +136,7 @@ export default {
       this.timer = setInterval(() => {
         // 如果 3 秒未收到新数据，触发滚动
         if (Date.now() - this.lastUpdateTime >= 6000) {
-          this.$refs.scroll.start(); // 触发滚动
+          // this.$refs.scroll.start(); // 触发滚动
         }
       }, 1000); // 每隔 1 秒检查
     },

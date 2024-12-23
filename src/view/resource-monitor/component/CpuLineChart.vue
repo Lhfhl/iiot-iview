@@ -179,7 +179,7 @@ export default {
         grid: {
           left: 10,
           right: 10,
-          bottom: 57,
+          bottom: 30,
           top: 30,
           containLabel: true
         },
@@ -227,7 +227,7 @@ export default {
 .chart-title {
   color: #007bff; /* 设置标题为蓝色字体 */
   font-size: 24px; /* 设置字体大小 */
-  margin-bottom: -20px;
+  margin-bottom: -10px;
   margin-top: -10px;
 }
 

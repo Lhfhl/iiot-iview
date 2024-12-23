@@ -1,4 +1,3 @@
-<!-- eslint-disable no-unused-vars -->
 <script>
 export default {
   props: {
@@ -10,46 +9,46 @@ export default {
       type: String,
       required: true,
     },
+    tags: {
+      type: Array,
+      default: () => [], // 当前标签列表
+    },
   },
   data() {
     return {
-      currentActiveNav: this.activeNav, // 初始值
+      currentActiveNav: this.activeNav, // 当前激活的导航项
     };
   },
   watch: {
     activeNav(newVal) {
-      this.currentActiveNav = newVal; // 监听父组件更新
-    },
-    $route(to) {
-      this.currentActiveNav = to.name; // 路由变化时更新
+      this.currentActiveNav = newVal; // 父组件更新时同步更新
     },
   },
   methods: {
-    tolink(name) {
-      if (this.currentActiveNav === name) return; // 防止重复点击
-      this.currentActiveNav = name;
-      this.$emit("update:activeNav", name); // 通知父组件更新
-      if (this.$router) {
-        this.$router.push({ name }); // 跳转路由
-      }
+    /**
+     * 在新标签页中打开路由
+     * @param {String} name 路由名称
+     */
+    openInNewTab(name) {
+      const route = this.$router.resolve({ name }); // 解析路由对应的路径
+      window.open(route.href, "_blank"); // 在新标签页中打开路径
     },
   },
 };
 </script>
 
 <template>
-  <!-- <ElMenu mode="horizontal" :active-name="currentActiveNav" @select="tolink"> -->
-    <ul class="main-nav-item">
-      <li
-        class="ivu-menu-item"
-        v-for="item in nav"
-        :key="item.name"
-        :class="{ 'ivu-menu-item-active': currentActiveNav === item.name }"
-      >
-        <a @click.prevent="tolink(item.name)">{{ item.meta.title }}</a>
-      </li>
-    </ul>
-  <!-- </ElMenu> -->
+  <ul class="main-nav-item">
+    <li
+      class="ivu-menu-item"
+      v-for="item in nav"
+      :key="item.name"
+      :class="{ 'ivu-menu-item-active': currentActiveNav === item.name }"
+    >
+      <!-- 使用 openInNewTab 在新标签页打开 -->
+      <a @click.prevent="openInNewTab(item.name)">{{ item.meta.title }}</a>
+    </li>
+  </ul>
 </template>
 
 <style scoped>
@@ -113,5 +112,4 @@ export default {
 .main-nav-item .ivu-menu-item:nth-of-type(7) {
   left: 80rem;
 }
-
 </style>

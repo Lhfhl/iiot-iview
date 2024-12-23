@@ -1,13 +1,13 @@
 <template>
     <div class="container">
-        <el-card style="background-color: #ffffff;">
-            <div style="display: flex; align-items: center;">
-                <h2 style="margin-right: 1em;">点击查看资源详情：</h2>
+        <el-card style="background-color: #ffffff; margin-top: -7px; margin-bottom: -7px">
+            <div style="display: flex; align-items: center; margin-top: -10px;">
+                <h2 style="margin-right: 1em; margin-top: -5px;">点击查看资源详情：</h2>
                 <button class="btn"  style="width: auto;" @click="openGrafana">Grafana</button>
             </div>
 
              <!-- cpu和memory -->
-             <!-- <el-row :gutter="10" style="margin-top: 5px;">
+             <el-row :gutter="10" style="margin-top: 5px;">
                 <el-col :span="12">
                     <el-card>
                         <div slot="header" type="flex" align="middle" justify="center">
@@ -69,11 +69,11 @@
                         </el-row>
                     </el-card>
                 </el-col>
-            </el-row> -->
+            </el-row>
 
             <!-- cpu和memory曲线 -->
             <el-row :gutter="15" style="margin-top: 8px;">
-                <el-col :span="12">
+                <el-col :span="6">
                     <!-- <el-card>
                         <raddar-chart
                         :indicators="chartIndicators"
@@ -87,7 +87,7 @@
                         />
                     </el-card> -->
 
-                    <el-card style="margin-top: 4px; height: 340px;">
+                    <el-card style="margin-top: 4px; height: 383px;">
                         <cpu-chart :dataA="cpu_kctd"
                         :dataB="cpu_t2"
                         :dataC="cpu_t3"
@@ -95,9 +95,9 @@
                     </el-card>
                 </el-col>
 
-                <el-col :span="12">
+                <el-col :span="6">
                     <!-- cpu -->
-                    <el-card style="margin-top: 4px; height: 340px;">
+                    <el-card style="margin-top: 4px; height: 383px;">
                       <memory-chart
                         :dataA="memory_kctd"
                         :dataB="memory_t3"
@@ -105,12 +105,36 @@
                          />
                     </el-card>
                 </el-col>
+                <!-- 标记 -->
+                <el-col :span="6">
+                    <el-card style="height: 383px;">
+                        <net-chart :dataG="kctdNet_downSpeed"
+                        :dataH="t2Net_downSpeed"
+                        :dataI="t3Net_downSpeed"
+                        :dataJ="kctdNet_upSpeed"
+                        :dataK="t2Net_upSpeed"
+                        :dataL="t3Net_upSpeed"
+                        legendData="负载"/>
 
+                    </el-card>
+                </el-col>
+                <el-col :span="6">
+                    <el-card style="height: 383px;">
+                        <disk-chart
+                        :dataG="kctdDisk_readSpeed"
+                        :dataH="t2Disk_readSpeed"
+                        :dataI="t3Disk_readSpeed"
+                        :dataJ="kctdDisk_writeSpeed"
+                        :dataK="t2Disk_writeSpeed"
+                        :dataL="t3Disk_writeSpeed"
+                        legendData="负载"/>
+
+                    </el-card>
+                </el-col>
             </el-row>
 
             <!-- 网络和磁盘 -->
-            <el-row :gutter="15" style="margin-top: 8px;">
-                <!-- 空 -->
+            <!-- <el-row :gutter="15" style="margin-top: 8px;">
                 <el-col :span="12">
                     <el-card style="height: 383px;">
                         <net-chart :dataG="kctdNet_downSpeed"
@@ -136,7 +160,7 @@
 
                     </el-card>
                 </el-col>
-            </el-row>
+            </el-row> -->
         </el-card>
 
     </div>
@@ -671,7 +695,7 @@ h4 {
 .cpu_memory_pie {
     font-weight: bold;
     border: 1.5px solid #B3D4FC;
-    height: 150px;
+
 }
 
 .cpu_memory_row {

@@ -67,7 +67,7 @@ export default {
       activeNav: this.$route.name || "line-monitoring", // 从路由初始化激活导航项
       nav: [ // 导航数据
         { name: "line-monitoring", link: "", meta: { title: "产线监控" } },
-        { name: "order-management", link: "", meta: { title: "订单管理" } },
+        { name: "ordermanagement", link: "", meta: { title: "订单管理" } },
         { name: "line-customization", link: "", meta: { title: "产线定制" } },
         { name: "modelmanagement", link: "", meta: { title: "模型管理" } },
         { name: "resourcemonitoring", link: "", meta: { title: "资源管理" } },
