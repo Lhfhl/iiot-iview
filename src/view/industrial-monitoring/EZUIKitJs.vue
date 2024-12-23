@@ -38,9 +38,11 @@ export default {
       player = new EZUIKit.EZUIKitPlayer({
         id: "video-container", // 视频容器ID
         accessToken:
-          "at.a8bbs23t9k56dsj5cn6699un5owkuivf-7i0fxnphq3-0kvxjck-9v9bjzcux", // 授权token
-        url: "ezopen://open.ys7.com/BC1950677/1.live", // 视频播放URL
-        template: "simple", // 使用极简版播放器模板
+          "at.cd9j675512bdxacx3fozc1zzcrfkdlor-7lk2a9tsjg-19axihe-hgflpy1lc",
+        url: "ezopen://open.ys7.com/BC1950677/1.live",
+        // validCode: "yzs123456789@",
+        // simple: 极简版; pcLive: pc直播; pcRec: pc回放; mobileLive: 移动端直播; mobileRec: 移动端回放;security: 安防版; voice: 语音版;
+        template: "simple",
         plugin: ["talk"], // 加载插件，talk-对讲
       });
       window.player = player; // 将播放器实例挂载到全局，便于调试

@@ -68,6 +68,13 @@ module.exports = {
         'pathRewrite': {
           '^/schedulerfront': ''
         }
+      },
+      '/nodeRedLineVideo': {
+        'target': 'http://10.112.196.200:30071/ws',
+        'changeOrigin': true,
+        'pathRewrite': {
+          '^/nodeRedLineVideo': ''
+        }
       }
     }
   }
