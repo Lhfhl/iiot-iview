@@ -12,6 +12,7 @@
         humidity: humidities,
         temperature: temperatures
       }"
+      yAxisUnit="%/℃"
       :seriesNames="['温度', '湿度', 'PM2.5']"
     />
 
@@ -26,7 +27,8 @@
         co2: co2,
         tvoc: tvoc
       }"
-      :seriesNames="['CO2', 'TVOC']"
+      yAxisUnit="ppm/ppb"
+      :seriesNames="['二氧化碳', '总挥发性有机物']"
     />
   </div>
 </template>

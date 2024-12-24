@@ -33,6 +33,10 @@ export default {
       type: Object, // Pass series data as an object
       required: true,
       validator: (value) => Object.keys(value).length > 0 // Ensure at least one dataset exists
+    },
+    yAxisUnit: {
+      type: String,
+      default: '(Units)' // Default y-axis unit
     }
   },
   data () {
@@ -72,23 +76,28 @@ export default {
       const seriesTemplate = {
         temperature: {
           areaColor: 'rgba(137, 189, 27, 0.3)',
-          lineColor: 'rgb(137,189,27)'
+          lineColor: 'rgb(137,189,27)',
+          displayName: '温度' // 显示为中文
         },
         humidity: {
           areaColor: 'rgba(0, 136, 212, 0.3)',
-          lineColor: 'rgb(0,136,212)'
+          lineColor: 'rgb(0,136,212)',
+          displayName: '湿度'
         },
         co2: {
           areaColor: 'rgba(219, 50, 51, 0.3)',
-          lineColor: 'rgb(219,50,51)'
+          lineColor: 'rgb(219,50,51)',
+          displayName: '二氧化碳'
         },
         tvoc: {
           areaColor: 'rgba(255, 165, 0, 0.3)',
-          lineColor: 'rgb(255,165,0)'
+          lineColor: 'rgb(255,165,0)',
+          displayName: '总挥发性有机物'
         },
         pm25: {
           areaColor: 'rgba(156, 39, 176, 0.3)', // 紫色渐变
-          lineColor: 'rgb(156,39,176)' // 紫色线条
+          lineColor: 'rgb(156,39,176)', // 紫色线条
+          displayName: 'PM2.5'
         }
       }
 
@@ -102,16 +111,16 @@ export default {
             )
         )
         .map((key) => ({
-          name: key,
+          name: seriesTemplate[key].displayName, // 使用中文名称
           data: this.seriesData[key],
-          ...seriesTemplate[key] // Match styles from template
+          ...seriesTemplate[key] // 匹配样式
         }))
 
       this.chart.setOption({
         backgroundColor: 'rgba(40, 50, 100, 0.1)',
         title: {
           top: 20,
-          text: 'Environmental Parameter',
+          text: '',
           textStyle: {
             fontWeight: 'normal',
             fontSize: 16,
@@ -133,7 +142,7 @@ export default {
           itemWidth: 14,
           itemHeight: 5,
           itemGap: 13,
-          data: validSeries.map((series) => series.name), // Dynamically generate legend based on valid data
+          data: validSeries.map((series) => series.name), // 使用中文名称生成图例
           right: '4%',
           textStyle: {
             fontSize: 12,
@@ -162,7 +171,7 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '(Units)',
+            name: this.yAxisUnit, // 动态设置纵坐标单位
             axisTick: {
               show: false
             },
