@@ -202,9 +202,9 @@ export default {
       /**
          * 服务器的cpu负载
          */
-      link_cpu_kctd: 'sum((1-sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="kctd"}[5m]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="kctd"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="kctd", mode="system"}))',
-      link_cpu_t2: 'sum( (1 - sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="t2"}[5m]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="t2"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="t2", mode="system"}))',
-      link_cpu_t3: 'sum( (1 - sum without (mode) (rate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="t3"}[5m]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="t3"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="t3", mode="system"}))',
+      link_cpu_kctd: 'sum( (1 - sum without (mode) (irate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="kctd"}[10s]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="kctd"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="kctd", mode="system"}))',
+      link_cpu_t2: 'sum((1 - sum without (mode) (irate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="t2"}[10s]))) / ignoring(cpu) group_left count without (cpu, mode)(node_cpu_seconds_total{job="node-exporter", mode="idle", instance="t2"}))/sum(count without (cpu) (node_cpu_seconds_total{instance="t2", mode="system"}))',
+      link_cpu_t3: 'sum( (1 - sum without (mode) (irate(node_cpu_seconds_total{job="node-exporter", mode=~"idle|iowait|steal", instance="t3"}[10s]))) / ignoring(cpu) group_left count without (cpu, mode) (node_cpu_seconds_total{job="node-exporter", mode="idle", instance="t3"}) ) / sum(count without (cpu) (node_cpu_seconds_total{instance="t3", mode="system"}))',
       cpu_kctd: 0,
       cpu_t2: 0,
       cpu_t3: 0,
@@ -314,7 +314,7 @@ export default {
         await this.fetch_kctdDisk_writeSpeed()
         await this.fetch_t2Disk_writeSpeed()
         await this.fetch_t3Disk_writeSpeed()
-      }, 30000);
+      }, 5000);
     },
     /**
          *
@@ -324,10 +324,10 @@ export default {
     async fetch_CPU_kctd() { // 获取服务器kctd的cpu负载
       try {
         const response = await axios.get(`/cloud/v1/query?query=${this.link_cpu_kctd}`)
-        this.cpu_kctd = Number((Number(response.data.data.result[0].value[1]) * 100 * 10).toFixed(2))
-        if (this.cpu_kctd > 71.5) {
-          this.cpu_kctd = 71.5
-        }
+        this.cpu_kctd = Number((Number(response.data.data.result[0].value[1]) * 4).toFixed(2))
+        // if (this.cpu_kctd > 71.5) {
+        //   this.cpu_kctd = 71.5
+        // }
         console.log("cpu_kctd", this.cpu_kctd)
       } catch (error) {
         console.error('获取服务器kctd的cpu负载', error);
@@ -337,10 +337,10 @@ export default {
     async fetch_CPU_t2() { // 获取服务器t2的cpu负载
       try {
         const response = await axios.get(`/cloud/v1/query?query=${this.link_cpu_t2}`)
-        this.cpu_t2 = Number((Number(response.data.data.result[0].value[1]) * 100 * 10).toFixed(2))
-        if (this.cpu_kctd > 82.9) {
-          this.cpu_kctd = 82.9
-        }
+        this.cpu_t2 = Number((Number(response.data.data.result[0].value[1]) * 8).toFixed(2))
+        // if (this.cpu_kctd > 82.9) {
+        //   this.cpu_kctd = 82.9
+        // }
         console.log('cpu_t2', this.cpu_t2)
       } catch (error) {
         console.error('获取服务器t2的cpu负载', error);
@@ -350,10 +350,10 @@ export default {
     async fetch_CPU_t3() { // 获取服务器t3的cpu负载
       try {
         const response = await axios.get(`/cloud/v1/query?query=${this.link_cpu_t3}`)
-        this.cpu_t3 = Number((Number(response.data.data.result[0].value[1]) * 100 * 10).toFixed(2))
-        if (this.cpu_kctd > 88) {
-          this.cpu_kctd = 88
-        }
+        this.cpu_t3 = Number((Number(response.data.data.result[0].value[1]) * 16).toFixed(2))
+        // if (this.cpu_kctd > 88) {
+        //   this.cpu_kctd = 88
+        // }
         console.log('cpu_t3', this.cpu_t3)
       } catch (error) {
         console.error('获取服务器t3的cpu负载', error);

@@ -52,7 +52,7 @@ export default {
       dataBHistory: [0, 0, 0, 0, 0, 0],
       dataCHistory: [0, 0, 0, 0, 0, 0],
       timestamps: ['00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00', '00:00:00'], // 新增：横坐标时间点
-      updateInterval: 30000, // 每30秒更新一次
+      updateInterval: 5000, // 每30秒更新一次
       timer: null, // 用于存储定时器
     };
   },

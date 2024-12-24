@@ -3,7 +3,7 @@
     <el-card>
       <el-row :gutter="10"> 
         <!-- 云边资源容器调度 -->
-        <el-col :span="12"> 
+        <el-col :span="10"> 
           <el-card>
             <h2>云边资源容器调度</h2>
             <!-- <div class="tabs">
@@ -46,6 +46,12 @@
                 <el-form-item label="镜像版本：" prop="image_version">
                   <el-input placeholder="latest" v-model="form.image_version" class="input_content"></el-input>
                 </el-form-item>
+
+                <!-- 配置命令 -->
+                <el-form-item label="command：" prop="command">
+                  <el-input placeholder="" v-model="form.command" class="input_content"></el-input>
+                </el-form-item>
+
                 <!-- 容器 "CPU" 需求和限制 -->
                 <div class="flex-container">
                   <el-form-item label="cpu需求：" prop="cpu_request" class="flex-item">
@@ -92,7 +98,7 @@
         </el-col>
         
         <!-- 部署查询 -->
-        <el-col :span="12"> 
+        <el-col :span="14"> 
           <el-card>
             <h2>部署查询</h2>
             <el-row type="flex" align="middle" justify="center" style="margin-top: 20px; margin-bottom: 20px;">
@@ -128,8 +134,50 @@
                 </el-table-column>
                 <el-table-column prop="replicas" label="副本数量" align="center">
                 </el-table-column>
+
+                <!-- 新增容器伸缩配置按钮列 -->
+                <el-table-column label="容器配置" align="center">
+                  <template slot-scope="scope">
+                    <el-button @click="openScalingDialog(scope.row)">容器配置</el-button>
+                  </template>
+                </el-table-column>
               </el-table>
             </el-row>
+            <!-- 容器伸缩配置弹窗 -->
+            <el-dialog :visible.sync="scalingDialogVisible" title="容器配置">
+            <el-form :model="scalingForm" label-width="120px">
+              <!-- 将“当前副本数”和“预期副本数”放在同一行 -->
+              <el-row>
+                <el-col :span="4">
+                  <el-form-item label="当前副本数：">
+                    <span>{{ scalingForm.currentReplicas }}</span>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="4">
+                  <el-form-item label="预期副本数：">
+                    <span>{{ scalingForm.expectedReplicas }}</span>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              
+              <el-form-item label="选择操作：">
+                <el-radio-group v-model="scalingForm.operation">
+                  <el-radio label="expand">扩展</el-radio>
+                  <el-radio label="shrink">缩减</el-radio>
+                </el-radio-group>
+              </el-form-item>
+              
+              <el-form-item label="改变的副本数量">
+                <el-input-number v-model="scalingForm.changeAmount" :min="0" :max="20" label="数量" @change="updateExpectedReplicas"/>
+              </el-form-item>
+              
+              <el-form-item>
+                <el-button type="danger" @click="resetReplicas">删除</el-button>
+                <el-button type="primary" @click="submitScaling">确定</el-button>
+                <el-button @click="resetForm">取消</el-button>
+              </el-form-item>
+            </el-form>
+            </el-dialog>
           </el-card>
         </el-col>
       </el-row>
@@ -156,6 +204,7 @@ export default{
             container_name: 'containerid-01',
             image_name: '',
             image_version: 'latest',
+            command: '',
             cpu_request: '200m',
             cpu_limit: '200m',
             mem_request: '200Mi',
@@ -180,7 +229,25 @@ export default{
         namespaces: [], // 存储命名空间列表
         selectedNamespace: 'default', // 默认命名空间
         deployments: [], // 存储部署列表
-
+        scalingDialogVisible: false, // 控制弹窗显示
+        // 默认值
+        defaultScalingForm: {
+          currentReplicas: 0,
+          expectedReplicas: 0,
+          operation: 'expand',
+          changeAmount: 1,
+          deployName: '',
+          namespace: '',
+        },
+        //待提交的容器伸缩配置
+        scalingForm: {
+          currentReplicas: 0, // 当前副本数
+          expectedReplicas: 0, // 预期副本数
+          operation: 'expand', // 选择操作（扩展或缩减）
+          changeAmount: 0, // 数量（默认为1）
+          deployName: '', // 部署名称
+          namespace: '', // 命名空间
+        },
     }
   },
   mounted() {
@@ -197,7 +264,7 @@ export default{
         }
         const response = await axios.post('/schedulerfront/form', this.form);
         console.log('提交成功', response.data);
-        console.log("表单数据：", this.form)
+        console.log("表单数据：", this.form);
         this.$message.success(response.data["message"]);
         this.$nextTick(() => {
           this.$refs.form.resetFields();
@@ -236,8 +303,75 @@ export default{
       } catch (error) {
         console.error('获取部署失败:', error);
       }
-    }
-  }
+    },
+    // 打开容器伸缩配置弹窗
+    openScalingDialog(deployment) {
+      this.scalingForm.deployName = deployment.deploy_name;
+      this.scalingForm.namespace = this.selectedNamespace;
+      this.scalingForm.currentReplicas = deployment.replicas;
+      this.scalingForm.expectedReplicas = deployment.replicas;
+      this.scalingDialogVisible = true;
+    },
+    // 删除操作：将预期副本数设为0
+    resetReplicas() {
+      this.scalingForm.expectedReplicas = 0;
+      this.scalingForm.changeAmount = 0;
+    },
+    // 提交容器伸缩配置
+    async submitScaling() {
+      const { namespace, deployName, expectedReplicas } = this.scalingForm;
+      if (expectedReplicas < 0 || expectedReplicas > 20) {
+        this.$message.error('预期副本数必须在0到20之间');
+        return;
+      }
+      if (expectedReplicas === this.scalingForm.currentReplicas) {
+        this.$message.error('预期副本数与当前副本数相同');
+        return;
+      }
+      
+      // 调用API接口提交伸缩请求
+      const requestData = {
+        namespace,
+        deployName,
+        targetNum: expectedReplicas,
+      };
+
+      try {
+        const response = await axios.post('/schedulerfront/scale', requestData);
+        this.$message.success('伸缩配置成功');
+        this.scalingDialogVisible = false;
+        // 更新部署信息
+        this.fetchDeployments();
+      } catch (error) {
+        this.$message.error('伸缩配置失败');
+        console.error('伸缩配置失败:', error);
+      }
+    },
+    // 计算预期副本数
+    updateExpectedReplicas() {
+      const { currentReplicas, operation, changeAmount } = this.scalingForm;
+      if (operation === 'expand') {
+        this.scalingForm.expectedReplicas = Math.min(20, currentReplicas + changeAmount);
+      } else if (operation === 'shrink') {
+        this.scalingForm.expectedReplicas = Math.max(0, currentReplicas - changeAmount);
+      }
+    },
+    // 重置表单为默认值
+    resetForm() {
+      this.scalingForm = { ...this.defaultScalingForm }; // 恢复默认值
+      this.scalingDialogVisible = false; // 关闭弹窗
+    },
+  },
+  watch: {
+    // 监听数量变化
+    'scalingForm.changeAmount': function () {
+      this.updateExpectedReplicas();
+    },
+    // 监听操作变化
+    'scalingForm.operation': function () {
+      this.updateExpectedReplicas();
+    },
+  },
 }
 </script>
 
