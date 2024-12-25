@@ -337,7 +337,7 @@ export default {
     async fetch_CPU_t2() { // 获取服务器t2的cpu负载
       try {
         const response = await axios.get(`/cloud/v1/query?query=${this.link_cpu_t2}`)
-        this.cpu_t2 = Number((Number(response.data.data.result[0].value[1]) * 8).toFixed(2))
+        this.cpu_t2 = Number((Number(response.data.data.result[0].value[1]) * 16).toFixed(2))
         // if (this.cpu_kctd > 82.9) {
         //   this.cpu_kctd = 82.9
         // }
@@ -350,7 +350,7 @@ export default {
     async fetch_CPU_t3() { // 获取服务器t3的cpu负载
       try {
         const response = await axios.get(`/cloud/v1/query?query=${this.link_cpu_t3}`)
-        this.cpu_t3 = Number((Number(response.data.data.result[0].value[1]) * 16).toFixed(2))
+        this.cpu_t3 = Number((Number(response.data.data.result[0].value[1]) * 8).toFixed(2))
         // if (this.cpu_kctd > 88) {
         //   this.cpu_kctd = 88
         // }

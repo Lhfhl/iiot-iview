@@ -13,80 +13,124 @@
             <!-- 基本信息页面 -->
             <div style="margin: 10% 10% 0;" type="flex"  justify="center">
               <el-form  label-position="left" class="form-section" :rules="rules1" :model="form" label-width="auto" ref="form">
-                <el-form-item label="部署名称：" prop="deployname" class="input_label">
-                  <el-input placeholder="deploy-name" v-model="form.deployname" class="input_content"></el-input>
-                </el-form-item>
-                <el-form-item label="命名空间：" prop="namespace" class="input_label">
-                  <el-input placeholder="default" v-model="form.namespace" class="input_content"></el-input>
-                </el-form-item>
-                <el-form-item label="副本数：" prop="replicas" class="input_label">
-                  <el-input placeholder="1" v-model="form.replicas" class="input_content"></el-input>
-                </el-form-item>
-                <el-form-item label="调度器：" prop="scheduler">
-                  <el-select v-model="form.scheduler" placeholder="请选择" :teleported="false">
-                    <el-option label="k8s-default" :value="1"></el-option>
-                    <el-option label="edge-scheduler" :value="0"></el-option>
-                  </el-select>
-                </el-form-item>
-                <el-form-item label="云边调度：" prop="scheduler_positon">
-                  <el-select v-model="form.scheduler_positon" placeholder="请选择" >
-                    <el-option label="边端" :value="1"></el-option>
-                    <el-option label="云端" :value="0"></el-option>
-                    <el-option label="任意" :value="2"></el-option>
-                  </el-select>
-                </el-form-item>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="部署名称：" prop="deployname" style="font-weight: bold">
+                      <el-input placeholder="deploy-name" v-model="form.deployname" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="命名空间：" prop="namespace" style="font-weight: bold">
+                      <el-input placeholder="default" v-model="form.namespace" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="副本数：" prop="replicas" style="font-weight: bold">
+                      <el-input placeholder="1" v-model="form.replicas" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="调度器：" prop="scheduler" style="font-weight: bold">
+                      <el-select v-model="form.scheduler" placeholder="请选择" :teleported="false">
+                        <el-option label="k8s-default" :value="1"></el-option>
+                        <el-option label="edge-scheduler" :value="0"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="云边调度：" prop="scheduler_positon" style="font-weight: bold">
+                      <el-select v-model="form.scheduler_positon" placeholder="请选择" >
+                        <el-option label="边端" :value="1"></el-option>
+                        <el-option label="云端" :value="0"></el-option>
+                        <el-option label="任意" :value="2"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
 
                 <!-- 容器配置页面 -->
-                <el-form-item label="容器名称：" prop="container_name">
-                  <el-input placeholder="containerid-01" v-model="form.container_name" class="input_content"></el-input>
-                </el-form-item>
-                <el-form-item label="镜像名称：" prop="image_name">
-                  <el-input placeholder="" v-model="form.image_name" class="input_content"></el-input>
-                </el-form-item>
-                <el-form-item label="镜像版本：" prop="image_version">
-                  <el-input placeholder="latest" v-model="form.image_version" class="input_content"></el-input>
-                </el-form-item>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="容器名称：" prop="container_name" style="font-weight: bold">
+                      <el-input placeholder="containerid-01" v-model="form.container_name" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="镜像名称：" prop="image_name" style="font-weight: bold">
+                      <el-input placeholder="" v-model="form.image_name" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="镜像版本：" prop="image_version" style="font-weight: bold">
+                      <el-input placeholder="latest" v-model="form.image_version" class="input_content"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
 
                 <!-- 配置命令 -->
-                <el-form-item label="command：" prop="command">
-                  <el-input placeholder="" v-model="form.command" class="input_content"></el-input>
+                <el-form-item label="command：" prop="command" style="font-weight: bold">
+                  <el-input placeholder="" v-model="form.command"></el-input>
                 </el-form-item>
 
                 <!-- 容器 "CPU" 需求和限制 -->
-                <div class="flex-container">
-                  <el-form-item label="cpu需求：" prop="cpu_request" class="flex-item">
-                    <el-input placeholder="200m" v-model="form.cpu_request" class="inputform"></el-input>
-                  </el-form-item>
-                  <el-form-item label="cpu限制：" prop="cpu_limit" class="flex-item">
-                    <el-input placeholder="200m" v-model="form.cpu_limit" class="inputform"></el-input>
-                  </el-form-item>
-                </div>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="cpu需求：" prop="cpu_request" style="font-weight: bold">
+                      <el-input placeholder="200m" v-model="form.cpu_request"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="cpu限制：" prop="cpu_limit" style="font-weight: bold">
+                      <el-input placeholder="200m" v-model="form.cpu_limit"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
                 <!-- 容器 "内存" 需求和限制 -->
-                <div class="flex-container">
-                  <el-form-item label="mem需求：" prop="mem_request" class="flex-item">
-                    <el-input placeholder="200Mi" v-model="form.mem_request" class="inputform"></el-input>
-                  </el-form-item>
-                  <el-form-item label="mem限制：" prop="mem_limit" class="flex-item">
-                    <el-input placeholder="200Mi" v-model="form.mem_limit" class="inputform"></el-input>
-                  </el-form-item>
-                </div>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="mem需求：" prop="mem_request" style="font-weight: bold">
+                      <el-input placeholder="200Mi" v-model="form.mem_request"></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item label="mem限制：" prop="mem_limit" style="font-weight: bold">
+                      <el-input placeholder="200Mi" v-model="form.mem_limit"></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
                 <!-- 选择是否需要GPU -->
-                <el-form-item label="使用gpu资源：" prop="use_gpu">
-                  <el-select v-model="form.use_gpu" placeholder="请选择">
-                    <el-option label="true" :value="1"></el-option>
-                    <el-option label="false" :value="0"></el-option>
-                    <el-option label="any" :value="2"></el-option>
-                  </el-select>
-                </el-form-item>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item label="使用gpu资源：" prop="use_gpu" style="font-weight: bold">
+                      <el-select v-model="form.use_gpu" placeholder="请选择">
+                        <el-option label="true" :value="1"></el-option>
+                        <el-option label="false" :value="0"></el-option>
+                        <el-option label="any" :value="2"></el-option>
+                      </el-select>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
                 <!-- 如果需要，则GPU需求和限制 -->
-                <div class="flex-container">
-                  <el-form-item v-if="form.use_gpu === 1" label="gpu需求：" prop="gpu_request" class="flex-item">
-                    <el-input placeholder="2000m" v-model="form.gpu_request" class="inputform"></el-input>
-                  </el-form-item>
-                  <el-form-item v-if="form.use_gpu === 1" label="gpu限制：" prop="gpu_limit" class="flex-item">
-                    <el-input placeholder="2000m" v-model="form.gpu_limit" class="inputform"></el-input>
-                  </el-form-item>
-                </div>
+                <el-row>
+                  <el-col :span="12">
+                    <el-form-item v-if="form.use_gpu === 1" label="gpu需求：" prop="gpu_request" style="font-weight: bold">
+                      <el-input placeholder="2000m" v-model="form.gpu_request" ></el-input>
+                    </el-form-item>
+                  </el-col>
+                  <el-col :span="12">
+                    <el-form-item v-if="form.use_gpu === 1" label="gpu限制：" prop="gpu_limit" style="font-weight: bold">
+                      <el-input placeholder="2000m" v-model="form.gpu_limit" ></el-input>
+                    </el-form-item>
+                  </el-col>
+                </el-row>
               </el-form>
             </div>
             <!-- 创建容器的按钮 -->
@@ -103,7 +147,7 @@
             <h2>部署查询</h2>
             <el-row type="flex" align="middle" justify="center" style="margin-top: 20px; margin-bottom: 20px;">
               <el-col :span="3">
-                <h4>命名空间：</h4>
+                <h3>命名空间：</h3>
               </el-col>
               <el-col :span="8">
                   <el-select v-model="selectedNamespace" placeholder="请选择命名空间" @change="fetchDeployments">
